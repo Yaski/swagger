@@ -1,2186 +1,2861 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "version": "1.0.0",
-        "title": "CloudBoost Application API",
-        "description": "Power your web or mobile application backend with cloudboost Database Service",
-        "termsOfService": "http://helloreverb.com/terms/",
-        "contact": {
-            "name": "Benedict Egima",
-            "email": "ben@cloudboost.io",
-            "url": "https://cloudboost.io"
-        },
-        "license": {
-            "name": "MIT",
-            "url": "http://opensource.org/licenses/MIT"
-        }
-    },
-    "host": "api.cloudboost.io",
-    "schemes": [
-        "https"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "paths": {
-					"/data/{app_id}/{table_name}/search": {
-            "post": {
-                "tags": [
-                    "CloudSearch"
-                ],
-				"summary":"search for cloudobjects following the criteria defined herein",
-                "description": "",
-                "operationId": "search",
-				"consumes":["application/json"],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "app_id",
-                        "in": "path",
-                        "description": "CloudApp id",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "table_name",
-                        "in": "path",
-                        "description": "cloud table name",
-                        "required": true,
-                        "type": "string"
-                    },
-					{
-						"in":"body",
-						"name":"body",
-						"description":"query body",
-						"required":true,
-						"schema":{"$ref":"#/definitions/searchBody"}
+	"swagger": "2.0",
+	"info": {
+		"version": "1.0.0",
+		"title": "CloudBoost Application API",
+		"description": "Power your web or mobile application backend with cloudboost Database Service",
+		"termsOfService": "http://helloreverb.com/terms/",
+		"contact": {
+			"name": "Benedict Egima",
+			"email": "ben@cloudboost.io",
+			"url": "https://cloudboost.io"
+		},
+		"license": {
+			"name": "MIT",
+			"url": "http://opensource.org/licenses/MIT"
+		}
+	},
+	"host": "api.cloudboost.io",
+	"schemes": ["https"],
+	"consumes": ["application/json"],
+	"produces": ["application/json"],
+	"paths": {
+		"/data/{app_id}/{table_name}/search": {
+			"post": {
+				"tags": ["CloudSearch"],
+				"summary": "search for cloudobjects following the criteria defined herein",
+				"description": "",
+				"operationId": "search",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "CloudApp id",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "table_name",
+					"in": "path",
+					"description": "cloud table name",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"in": "body",
+					"name": "body",
+					"description": "query body",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/searchBody"
 					}
-                ],
-                "responses": {
+				}],
+				"responses": {
 					"200": {
-							"description": "cloud search response",
-							"schema": {"type":"array","items":{"$ref": "#/definitions/saveObjectResponse"}}																			
-							},
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
-            }
+						"description": "cloud search response",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/saveObjectResponse"
+							}
+						}
+					},
+					"default": {
+						"description": "unexpected error"
+					}
+				}
+			}
+		},
+		"/data/{app_id}/{table_name}/findOne": {
+			"post": {
+				"tags": ["CloudQuery"],
+				"summary": "find a single CloudObject",
+				"description": "",
+				"operationId": "findOne",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "CloudApp id",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "table_name",
+					"in": "path",
+					"description": "cloud table name",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"in": "body",
+					"name": "body",
+					"description": "query body",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/queryFindOne"
+					}
+				}],
+				"responses": {
+					"200": {
+						"description": "cloudsave response",
+						"schema": {
+							"$ref": "#/definitions/saveObjectResponse"
+						}
+					},
+					"default": {
+						"description": "unexpected error"
+					}
+				}
+			}
+		},
+		"/data/{cloud_app_id}/{table_name}/find": {
+			"post": {
+				"tags": ["CloudQuery"],
+				"summary": "find CloudObject with specific _id",
+				"description": "",
+				"operationId": "findById",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "cloud_app_id",
+					"in": "path",
+					"description": "CloudApp id",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "table_name",
+					"in": "path",
+					"description": "cloud table name",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"in": "body",
+					"name": "body",
+					"description": "query body",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/queryFindById"
+					}
+				}],
+				"responses": {
+					"200": {
+						"description": "cloudsave response",
+						"schema": {
+							"$ref": "#/definitions/saveObjectResponse"
+						}
+					},
+					"default": {
+						"description": "unexpected error"
+					}
+				}
+			}
+		},
+		"/data/{app_id}/{table_name}/find": {
+			"post": {
+				"tags": ["CloudQuery"],
+				"summary": "find CloudObject meeting this query criteria",
+				"description": "",
+				"operationId": "find",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "CloudApp id",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "table_name",
+					"in": "path",
+					"description": "cloud table name",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"in": "body",
+					"name": "body",
+					"description": "query object",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/queryMaster"
+					}
+				}],
+				"responses": {
+					"200": {
+						"description": "cloudsave response",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/saveObjectResponse"
+							}
+						}
+					},
+					"default": {
+						"description": "unexpected error"
+					}
+				}
+			}
+		},
+		"/data/{app_id}/{table_name}/distinct": {
+			"post": {
+				"tags": ["CloudQuery"],
+				"summary": "distinct query criteria",
+				"description": "",
+				"operationId": "distinct",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "CloudApp id",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "table_name",
+					"in": "path",
+					"description": "cloud table name",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"in": "body",
+					"name": "body",
+					"description": "query body",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/queryDistinct"
+					}
+				}],
+				"responses": {
+					"200": {
+						"description": "cloudsave response",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/saveObjectResponse"
+							}
+						}
+					},
+					"default": {
+						"description": "unexpected error"
+					}
+				}
+			}
+		},
+		"/data/{app_id}/{table_name}/count": {
+			"post": {
+				"tags": ["CloudQuery"],
+				"summary": "count items in a table that match this query criteria",
+				"description": "count items in a table that match this query criteria",
+				"operationId": "count",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "CloudApp id",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "table_name",
+					"in": "path",
+					"description": "cloud table name",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"in": "body",
+					"name": "body",
+					"description": "query body",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/queryCount"
+					}
+				}],
+				"responses": {
+					"200": {
+						"description": "cloudsave response",
+						"schema": {
+							"$ref": "#/definitions/saveObjectResponse"
+						}
+					},
+					"default": {
+						"description": "unexpected error"
+					}
+				}
+			}
+		},
+		"/data/{app_id}/{table_name}": {
+			"put": {
+				"tags": ["CloudObject"],
+				"description": "saves a cloud object to cloudboost",
+				"operationId": "save",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "CloudApp id",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "table_name",
+					"in": "path",
+					"description": "cloud table name",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"in": "body",
+					"name": "body",
+					"description": "CloudObject that needs to be added to the cloudboost",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/body"
+					}
+				}],
+				"responses": {
+					"200": {
+						"description": "cloudsave response",
+						"schema": {
+							"$ref": "#/definitions/saveObjectResponse"
+						}
+					},
+					"default": {
+						"description": "unexpected error"
+					}
+				}
 			},
-
-			"/data/{app_id}/{table_name}/findOne": {
-            "post": {
-                "tags": [
-                    "CloudQuery"
-                ],
-				"summary":"find a single CloudObject",
-                "description": "",
-                "operationId": "findOne",
-				"consumes":["application/json"],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "app_id",
-                        "in": "path",
-                        "description": "CloudApp id",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "table_name",
-                        "in": "path",
-                        "description": "cloud table name",
-                        "required": true,
-                        "type": "string"
-                    },
-					{
-						"in":"body",
-						"name":"body",
-						"description":"query body",
-						"required":true,
-						"schema":{"$ref":"#/definitions/queryFindOne"}
+			"post": {
+				"tags": ["CloudObject"],
+				"description": "saves an Array of cloudobjects to cloudboost",
+				"operationId": "saveAll",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "CloudApp id",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "table_name",
+					"in": "path",
+					"description": "cloud table name",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"in": "body",
+					"name": "body",
+					"description": "CloudObject array that need to be added to cloudboost",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/objectArray"
 					}
-                ],
-                "responses": {
+				}],
+				"responses": {
 					"200": {
-							"description": "cloudsave response",
-							"schema": {"$ref": "#/definitions/saveObjectResponse"}																			
-							},
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
-            }
+						"description": "cloudsave response",
+						"schema": {
+							"$ref": "#/definitions/saveObjectResponse"
+						}
+					},
+					"default": {
+						"description": "unexpected error"
+					}
+				}
 			},
-			"/data/{cloud_app_id}/{table_name}/find": {
-            "post": {
-                "tags": [
-                    "CloudQuery"
-                ],
-				"summary":"find CloudObject with specific _id",
-                "description": "",
-                "operationId": "findById",
-				"consumes":["application/json"],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "cloud_app_id",
-                        "in": "path",
-                        "description": "CloudApp id",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "table_name",
-                        "in": "path",
-                        "description": "cloud table name",
-                        "required": true,
-                        "type": "string"
-                    },
-					{
-						"in":"body",
-						"name":"body",
-						"description":"query body",
-						"required":true,
-						"schema":{"$ref":"#/definitions/queryFindById"}
-					}
-                ],
-                "responses": {
-					"200": {
-							"description": "cloudsave response",
-							"schema": {"$ref": "#/definitions/saveObjectResponse"}																			
-							},
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
-            }
-			},
-			"/data/{app_id}/{table_name}/find": {
-            "post": {
-                "tags": [
-                    "CloudQuery"
-                ],
-				"summary":"find CloudObject meeting this query criteria",
-                "description": "",
-                "operationId": "find",
-				"consumes":["application/json"],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "app_id",
-                        "in": "path",
-                        "description": "CloudApp id",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "table_name",
-                        "in": "path",
-                        "description": "cloud table name",
-                        "required": true,
-                        "type": "string"
-                    },
-					{
-						"in":"body",
-						"name":"body",
-						"description":"query object",
-						"required":true,
-						"schema":{"$ref":"#/definitions/queryMaster"}
-					}
-                ],
-                "responses": {
-					"200": {
-							"description": "cloudsave response",
-							"schema": {"type":"array","items":{"$ref": "#/definitions/saveObjectResponse"}}																			
-							},
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
-            }
-			},
-			"/data/{app_id}/{table_name}/distinct": {
-            "post": {
-                "tags": [
-                    "CloudQuery"
-                ],
-				"summary":"distinct query criteria",
-                "description": "",
-                "operationId": "distinct",
-				"consumes":["application/json"],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "app_id",
-                        "in": "path",
-                        "description": "CloudApp id",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "table_name",
-                        "in": "path",
-                        "description": "cloud table name",
-                        "required": true,
-                        "type": "string"
-                    },
-					{
-						"in":"body",
-						"name":"body",
-						"description":"query body",
-						"required":true,
-						"schema":{"$ref":"#/definitions/queryDistinct"}
-					}
-                ],
-                "responses": {
-					"200": {
-							"description": "cloudsave response",
-							"schema": {"type":"array","items":{"$ref": "#/definitions/saveObjectResponse"}}																			
-							},
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
-            }
-			},
-		    "/data/{app_id}/{table_name}/count": {
-            "post": {
-                "tags": [
-                    "CloudQuery"
-                ],
-				"summary":"count items in a table that match this query criteria",
-                "description": "count items in a table that match this query criteria",
-                "operationId": "count",
-				"consumes":["application/json"],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "app_id",
-                        "in": "path",
-                        "description": "CloudApp id",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "table_name",
-                        "in": "path",
-                        "description": "cloud table name",
-                        "required": true,
-                        "type": "string"
-                    },
-					{
-						"in":"body",
-						"name":"body",
-						"description":"query body",
-						"required":true,
-						"schema":{"$ref":"#/definitions/queryCount"}
-					}
-                ],
-                "responses": {
-					"200": {
-							"description": "cloudsave response",
-							"schema": {"$ref": "#/definitions/saveObjectResponse"}																			
-							},
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
-            }
-			},
-        "/data/{app_id}/{table_name}": {
-            "put": {
-                "tags": [
-                    "CloudObject"
-                ],
-                "description": "saves a cloud object to cloudboost",
-                "operationId": "save",
-				"consumes":["application/json"],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "app_id",
-                        "in": "path",
-                        "description": "CloudApp id",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "table_name",
-                        "in": "path",
-                        "description": "cloud table name",
-                        "required": true,
-                        "type": "string"
-                    },
-					{
-						"in":"body",
-						"name":"body",
-						"description":"CloudObject that needs to be added to the cloudboost",
-						"required":true,
-						"schema":{"$ref":"#/definitions/body"}
-					}
-                ],
-                "responses": {
-					"200": {
-							"description": "cloudsave response",
-							"schema": {"$ref": "#/definitions/saveObjectResponse"}																			
-							},
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
-            },
-		"post": {
-                "tags": [
-                    "CloudObject"
-                ],
-                "description": "saves an Array of cloudobjects to cloudboost",
-                "operationId": "saveAll",
-				"consumes":["application/json"],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "app_id",
-                        "in": "path",
-                        "description": "CloudApp id",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "table_name",
-                        "in": "path",
-                        "description": "cloud table name",
-                        "required": true,
-                        "type": "string"
-                    },
-					{
-						"in":"body",
-						"name":"body",
-						"description":"CloudObject array that need to be added to cloudboost",
-						"required":true,
-						"schema":{"$ref":"#/definitions/objectArray"}
-					}
-                ],
-                "responses": {
-					"200": {
-							"description": "cloudsave response",
-							"schema": {"$ref": "#/definitions/saveObjectResponse"}																			
-							},
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
-            },            
 			"delete": {
-                "tags": [
-                    "CloudObject"
-                ],
-                "description": "deletes a cloud object from cloudapp",
-                "operationId": "delete",
-				"consumes":["application/json"],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "app_id",
-                        "in": "path",
-                        "description": "CloudApp id",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "table_name",
-                        "in": "path",
-                        "description": "cloud table name",
-                        "required": true,
-                        "type": "string"
-                    },
-					{
-						"in":"body",
-						"name":"body",
-						"description":"CloudObject that needs to be added to the cloudboost",
-						"required":true,
-						"schema":{"$ref":"#/definitions/saveObjectResponse"}
-					}
-                ],
-                "responses": {
-					"200": {
-							"description": "cloudsave response",
-							"schema": {"$ref": "#/definitions/saveObjectResponse"}																			
-							},
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
-            }
-        },
-		"/cache/{app_id}/{cache_name}/{data_key}":{
-			"put":{
-				"tags":["CloudCache"],
-				"description":"add item to a cloud cache",
-				"operationId":"addItem",
-				"consumes":["application/json"],
-				"produces":["application/json"],
-				"parameters":[
+				"tags": ["CloudObject"],
+				"description": "deletes a cloud object from cloudapp",
+				"operationId": "delete",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "CloudApp id",
+					"required": true,
+					"type": "string"
+				},
 				{
-					"name":"app_id",
-					"in":"path",
-					"description":"Id of CloudApp",
-					"required":true,
-					"type":"string"
+					"name": "table_name",
+					"in": "path",
+					"description": "cloud table name",
+					"required": true,
+					"type": "string"
 				},
-								{
-					"name":"cache_name",
-					"in":"path",
-					"description":"Name of cache",
-					"required":true,
-					"type":"string"
-				},
-												{
-					"name":"data_key",
-					"in":"path",
-					"description":"key under which data should be store in cache",
-					"required":true,
-					"type":"string"
-				},
-					{
-						"in":"body",
-						"name":"body",
-						"description":"cache data and master key included got from this object",
-						"required":true,
-						"schema":{"$ref":"#/definitions/cacheItem"}
+				{
+					"in": "body",
+					"name": "body",
+					"description": "CloudObject that needs to be added to the cloudboost",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/saveObjectResponse"
 					}
-				],
-				       "responses": {
+				}],
+				"responses": {
 					"200": {
-							"description": "successfully added to cache",
-							"schema": {"$ref": "#/definitions/cacheItem"}																			
-							},
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
+						"description": "cloudsave response",
+						"schema": {
+							"$ref": "#/definitions/saveObjectResponse"
+						}
+					},
+					"default": {
+						"description": "unexpected error"
+					}
+				}
 			}
 		},
-		"/cache/{app_id}/{cache_name}/item/{data_key}":{
-			"delete":{
-				"tags":["CloudCache"],
-				"description":"delete item from a cloud cache",
-				"operationId":"deleteItem",
-				"consumes":["application/json"],
-				"produces":["application/json"],
-				"parameters":[
+		"/cache/{app_id}/{cache_name}/{data_key}": {
+			"put": {
+				"tags": ["CloudCache"],
+				"description": "add item to a cloud cache",
+				"operationId": "addItem",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "Id of CloudApp",
+					"required": true,
+					"type": "string"
+				},
 				{
-					"name":"app_id",
-					"in":"path",
-					"description":"Id of CloudApp",
-					"required":true,
-					"type":"string"
+					"name": "cache_name",
+					"in": "path",
+					"description": "Name of cache",
+					"required": true,
+					"type": "string"
 				},
-								{
-					"name":"cache_name",
-					"in":"path",
-					"description":"Name of cache",
-					"required":true,
-					"type":"string"
+				{
+					"name": "data_key",
+					"in": "path",
+					"description": "key under which data should be store in cache",
+					"required": true,
+					"type": "string"
 				},
-												{
-					"name":"data_key",
-					"in":"path",
-					"description":"key under which data to delete is cached",
-					"required":true,
-					"type":"string"
-				},
-					{
-						"in":"body",
-						"name":"body",
-						"description":"master key of app",
-						"required":true,
-						"schema":{"$ref":"#/definitions/keyBody"}
+				{
+					"in": "body",
+					"name": "body",
+					"description": "cache data and master key included got from this object",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/cacheItem"
 					}
-				],
-				       "responses": {
+				}],
+				"responses": {
 					"200": {
-							"description": "successfully added to cache",
-							"schema": {"$ref": "#/definitions/cacheItem"}																			
-							},
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
+						"description": "successfully added to cache",
+						"schema": {
+							"$ref": "#/definitions/cacheItem"
+						}
+					},
+					"default": {
+						"description": "unexpected error"
+					}
+				}
 			}
 		},
-		"/cache/{app_id}/{cache_name}/{data_key}/item":{
-			"post":{
-				"tags":["CloudCache"],
-				"description":"get item from a cloud cache",
-				"operationId":"getItem",
-				"consumes":["application/json"],
-				"produces":["application/json"],
-				"parameters":[
+		"/cache/{app_id}/{cache_name}/item/{data_key}": {
+			"delete": {
+				"tags": ["CloudCache"],
+				"description": "delete item from a cloud cache",
+				"operationId": "deleteItem",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "Id of CloudApp",
+					"required": true,
+					"type": "string"
+				},
 				{
-					"name":"app_id",
-					"in":"path",
-					"description":"Id of CloudApp",
-					"required":true,
-					"type":"string"
+					"name": "cache_name",
+					"in": "path",
+					"description": "Name of cache",
+					"required": true,
+					"type": "string"
 				},
-								{
-					"name":"cache_name",
-					"in":"path",
-					"description":"Name of cache",
-					"required":true,
-					"type":"string"
+				{
+					"name": "data_key",
+					"in": "path",
+					"description": "key under which data to delete is cached",
+					"required": true,
+					"type": "string"
 				},
-												{
-					"name":"data_key",
-					"in":"path",
-					"description":"key under which data should be got in cache",
-					"required":true,
-					"type":"string"
-				},
-					{
-						"in":"body",
-						"name":"body",
-						"description":"master key of app",
-						"required":true,
-						"schema":{"$ref":"#/definitions/keyBody"}
+				{
+					"in": "body",
+					"name": "body",
+					"description": "master key of app",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/keyBody"
 					}
-				],
-				       "responses": {
+				}],
+				"responses": {
 					"200": {
-							"description": "successfully got item from cache",
-							"schema": {"$ref": "#/definitions/cacheItem"}																			
-							},
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
+						"description": "successfully added to cache",
+						"schema": {
+							"$ref": "#/definitions/cacheItem"
+						}
+					},
+					"default": {
+						"description": "unexpected error"
+					}
+				}
 			}
 		},
-		"/cache/{app_id}/{cache_name}/create":{
-			"post":{
-				"tags":["CloudCache"],
-				"description":"create a cloud cache",
-				"operationId":"createCache",
-				"consumes":["application/json"],
-				"produces":["application/json"],
-				"parameters":[
-				{
-					"name":"app_id",
-					"in":"path",
-					"description":"Id of CloudApp",
-					"required":true,
-					"type":"string"
-				},
-								{
-					"name":"cache_name",
-					"in":"path",
-					"description":"Name of cache",
-					"required":true,
-					"type":"string"
+		"/cache/{app_id}/{cache_name}/{data_key}/item": {
+			"post": {
+				"tags": ["CloudCache"],
+				"description": "get item from a cloud cache",
+				"operationId": "getItem",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "Id of CloudApp",
+					"required": true,
+					"type": "string"
 				},
 				{
-						"in":"body",
-						"name":"body",
-						"description":"master key of app",
-						"required":true,
-						"schema":{"$ref":"#/definitions/keyBody"}
+					"name": "cache_name",
+					"in": "path",
+					"description": "Name of cache",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "data_key",
+					"in": "path",
+					"description": "key under which data should be got in cache",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"in": "body",
+					"name": "body",
+					"description": "master key of app",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/keyBody"
 					}
-				],
-				       "responses": {
+				}],
+				"responses": {
 					"200": {
-							"description": "successfully created a cache",
-							"schema": {"$ref": "#/definitions/cacheItem"}																			
-							},
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
+						"description": "successfully got item from cache",
+						"schema": {
+							"$ref": "#/definitions/cacheItem"
+						}
+					},
+					"default": {
+						"description": "unexpected error"
+					}
+				}
 			}
 		},
-		"/cache/{app_id}/{cache_name}/items/count":{
-			"post":{
-				"tags":["CloudCache"],
-				"description":"count items in a cloud cache",
-				"operationId":"getItemsCount",
-				"consumes":["application/json"],
-				"produces":["application/json"],
-				"parameters":[
-				{
-					"name":"app_id",
-					"in":"path",
-					"description":"Id of CloudApp",
-					"required":true,
-					"type":"string"
-				},
-								{
-					"name":"cache_name",
-					"in":"path",
-					"description":"Name of cache",
-					"required":true,
-					"type":"string"
+		"/cache/{app_id}/{cache_name}/create": {
+			"post": {
+				"tags": ["CloudCache"],
+				"description": "create a cloud cache",
+				"operationId": "createCache",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "Id of CloudApp",
+					"required": true,
+					"type": "string"
 				},
 				{
-						"in":"body",
-						"name":"body",
-						"description":"master key of app",
-						"required":true,
-						"schema":{"$ref":"#/definitions/keyBody"}
+					"name": "cache_name",
+					"in": "path",
+					"description": "Name of cache",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"in": "body",
+					"name": "body",
+					"description": "master key of app",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/keyBody"
 					}
-				],
-				       "responses": {
+				}],
+				"responses": {
 					"200": {
-							"description": "item count",
-							"type":"integer"																		
-							},
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
+						"description": "successfully created a cache",
+						"schema": {
+							"$ref": "#/definitions/cacheItem"
+						}
+					},
+					"default": {
+						"description": "unexpected error"
+					}
+				}
 			}
 		},
-		"/cache/{app_id}":{
-			"post":{
-				"tags":["CloudCache"],
-				"description":"get all CloudCaches",
-				"operationId":"getAllCache",
-				"consumes":["application/json"],
-				"produces":["application/json"],
-				"parameters":[
-				{
-					"name":"app_id",
-					"in":"path",
-					"description":"Id of CloudApp",
-					"required":true,
-					"type":"string"
+		"/cache/{app_id}/{cache_name}/items/count": {
+			"post": {
+				"tags": ["CloudCache"],
+				"description": "count items in a cloud cache",
+				"operationId": "getItemsCount",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "Id of CloudApp",
+					"required": true,
+					"type": "string"
 				},
-					{
-						"in":"body",
-						"name":"body",
-						"description":"master key of app",
-						"required":true,
-						"schema":{"$ref":"#/definitions/keyBody"}
+				{
+					"name": "cache_name",
+					"in": "path",
+					"description": "Name of cache",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"in": "body",
+					"name": "body",
+					"description": "master key of app",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/keyBody"
 					}
-				],
-				       "responses": {
+				}],
+				"responses": {
 					"200": {
-							"description": "successfully got caches",
-							"schema": {"type":"array","items":{"$ref": "#/definitions/cacheItem"}}																			
-							},
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
+						"description": "item count",
+						"type": "integer"
+					},
+					"default": {
+						"description": "unexpected error"
+					}
+				}
+			}
+		},
+		"/cache/{app_id}": {
+			"post": {
+				"tags": ["CloudCache"],
+				"description": "get all CloudCaches",
+				"operationId": "getAllCache",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "Id of CloudApp",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"in": "body",
+					"name": "body",
+					"description": "master key of app",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/keyBody"
+					}
+				}],
+				"responses": {
+					"200": {
+						"description": "successfully got caches",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/cacheItem"
+							}
+						}
+					},
+					"default": {
+						"description": "unexpected error"
+					}
+				}
 			},
-						"delete":{
-				"tags":["CloudCache"],
-				"description":"delete all CloudCaches",
-				"operationId":"deleteAllCache",
-				"consumes":["application/json"],
-				"produces":["application/json"],
-				"parameters":[
-				{
-					"name":"app_id",
-					"in":"path",
-					"description":"Id of CloudApp",
-					"required":true,
-					"type":"string"
+			"delete": {
+				"tags": ["CloudCache"],
+				"description": "delete all CloudCaches",
+				"operationId": "deleteAllCache",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "Id of CloudApp",
+					"required": true,
+					"type": "string"
 				},
-					{
-						"in":"body",
-						"name":"body",
-						"description":"master key of app",
-						"required":true,
-						"schema":{"$ref":"#/definitions/keyBody"}
+				{
+					"in": "body",
+					"name": "body",
+					"description": "master key of app",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/keyBody"
 					}
-				],
-				       "responses": {
+				}],
+				"responses": {
 					"200": {
-							"description": "successfully deleted caches",
-							"schema": {"type":"array","items":{"$ref": "#/definitions/cacheItem"}}																			
-							},
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
+						"description": "successfully deleted caches",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/cacheItem"
+							}
+						}
+					},
+					"default": {
+						"description": "unexpected error"
+					}
+				}
 			}
 		},
-		"/cache/{app_id}/{cache_name}/items":{
-			"post":{
-				"tags":["CloudCache"],
-				"description":"get all items from a cloud cache",
-				"operationId":"getAllItems",
-				"consumes":["application/json"],
-				"produces":["application/json"],
-				"parameters":[
+		"/cache/{app_id}/{cache_name}/items": {
+			"post": {
+				"tags": ["CloudCache"],
+				"description": "get all items from a cloud cache",
+				"operationId": "getAllItems",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "Id of CloudApp",
+					"required": true,
+					"type": "string"
+				},
 				{
-					"name":"app_id",
-					"in":"path",
-					"description":"Id of CloudApp",
-					"required":true,
-					"type":"string"
+					"name": "cache_name",
+					"in": "path",
+					"description": "Name of cache",
+					"required": true,
+					"type": "string"
 				},
-								{
-					"name":"cache_name",
-					"in":"path",
-					"description":"Name of cache",
-					"required":true,
-					"type":"string"
-				},
-					{
-						"in":"body",
-						"name":"body",
-						"description":"master key of app",
-						"required":true,
-						"schema":{"$ref":"#/definitions/keyBody"}
+				{
+					"in": "body",
+					"name": "body",
+					"description": "master key of app",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/keyBody"
 					}
-				],
-				       "responses": {
+				}],
+				"responses": {
 					"200": {
-							"description": "successfully got items from cache",
-							"schema": {"type":"array","items":{"$ref": "#/definitions/cacheItem"}}																			
-							},
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
+						"description": "successfully got items from cache",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/cacheItem"
+							}
+						}
+					},
+					"default": {
+						"description": "unexpected error"
+					}
+				}
 			}
 		},
-		"/cache/{app_id}/{cache_name}/clear":{
-			"delete":{
-				"tags":["CloudCache"],
-				"description":"clear all items from a cloud cache",
-				"operationId":"clearCache",
-				"consumes":["application/json"],
-				"produces":["application/json"],
-				"parameters":[
+		"/cache/{app_id}/{cache_name}/clear": {
+			"delete": {
+				"tags": ["CloudCache"],
+				"description": "clear all items from a cloud cache",
+				"operationId": "clearCache",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "Id of CloudApp",
+					"required": true,
+					"type": "string"
+				},
 				{
-					"name":"app_id",
-					"in":"path",
-					"description":"Id of CloudApp",
-					"required":true,
-					"type":"string"
+					"name": "cache_name",
+					"in": "path",
+					"description": "Name of cache",
+					"required": true,
+					"type": "string"
 				},
-								{
-					"name":"cache_name",
-					"in":"path",
-					"description":"Name of cache",
-					"required":true,
-					"type":"string"
-				},
-					{
-						"in":"body",
-						"name":"body",
-						"description":"master key of app",
-						"required":true,
-						"schema":{"$ref":"#/definitions/keyBody"}
+				{
+					"in": "body",
+					"name": "body",
+					"description": "master key of app",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/keyBody"
 					}
-				],
-				       "responses": {
+				}],
+				"responses": {
 					"200": {
-							"description": "successfully cleared cache",
-							"schema": {"type":"array","items":{"$ref": "#/definitions/cacheItem"}}																			
-							},
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
+						"description": "successfully cleared cache",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/cacheItem"
+							}
+						}
+					},
+					"default": {
+						"description": "unexpected error"
+					}
+				}
 			}
 		},
-		"/cache/{app_id}/{cache_name}":{
-			"delete":{
-				"tags":["CloudCache"],
-				"description":"delete a CloudCache",
-				"operationId":"deleteCache",
-				"consumes":["application/json"],
-				"produces":["application/json"],
-				"parameters":[
+		"/cache/{app_id}/{cache_name}": {
+			"delete": {
+				"tags": ["CloudCache"],
+				"description": "delete a CloudCache",
+				"operationId": "deleteCache",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "Id of CloudApp",
+					"required": true,
+					"type": "string"
+				},
 				{
-					"name":"app_id",
-					"in":"path",
-					"description":"Id of CloudApp",
-					"required":true,
-					"type":"string"
+					"name": "cache_name",
+					"in": "path",
+					"description": "Name of cache",
+					"required": true,
+					"type": "string"
 				},
-								{
-					"name":"cache_name",
-					"in":"path",
-					"description":"Name of cache",
-					"required":true,
-					"type":"string"
-				},
-					{
-						"in":"body",
-						"name":"body",
-						"description":"master key of app",
-						"required":true,
-						"schema":{"$ref":"#/definitions/keyBody"}
+				{
+					"in": "body",
+					"name": "body",
+					"description": "master key of app",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/keyBody"
 					}
-				],
-				       "responses": {
+				}],
+				"responses": {
 					"200": {
-							"description": "successfully deleted cache",
-							"schema": {"$ref": "#/definitions/cacheItem"}																			
-							},
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
+						"description": "successfully deleted cache",
+						"schema": {
+							"$ref": "#/definitions/cacheItem"
+						}
+					},
+					"default": {
+						"description": "unexpected error"
+					}
+				}
 			},
-			"post":{
-				"tags":["CloudCache"],
-				"description":"get info about a CloudCache",
-				"operationId":"getCacheInfo",
-				"consumes":["application/json"],
-				"produces":["application/json"],
-				"parameters":[
+			"post": {
+				"tags": ["CloudCache"],
+				"description": "get info about a CloudCache",
+				"operationId": "getCacheInfo",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "Id of CloudApp",
+					"required": true,
+					"type": "string"
+				},
 				{
-					"name":"app_id",
-					"in":"path",
-					"description":"Id of CloudApp",
-					"required":true,
-					"type":"string"
+					"name": "cache_name",
+					"in": "path",
+					"description": "Name of cache",
+					"required": true,
+					"type": "string"
 				},
-								{
-					"name":"cache_name",
-					"in":"path",
-					"description":"Name of cache",
-					"required":true,
-					"type":"string"
-				},
-					{
-						"in":"body",
-						"name":"body",
-						"description":"master key of app",
-						"required":true,
-						"schema":{"$ref":"#/definitions/keyBody"}
+				{
+					"in": "body",
+					"name": "body",
+					"description": "master key of app",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/keyBody"
 					}
-				],
-				       "responses": {
+				}],
+				"responses": {
 					"200": {
-							"description": "successfully got cache info",
-							"schema": {"$ref": "#/definitions/cacheItem"}																			
-							},
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
+						"description": "successfully got cache info",
+						"schema": {
+							"$ref": "#/definitions/cacheItem"
+						}
+					},
+					"default": {
+						"description": "unexpected error"
+					}
+				}
 			}
 		},
-		"/queue/{app_id}/{queue_name}/{message_id}/refresh-message-timeout":{
-			"put":{
-				"tags":["CloudQueue"],
-				"description":"refresh timeout of a message in this queue",
-				"operationId":"refreshMessageTimeout",
-				"consumes":["application/json"],
-				"produces":["application/json"],
-				"parameters":[
+		"/queue/{app_id}/{queue_name}/{message_id}/refresh-message-timeout": {
+			"put": {
+				"tags": ["CloudQueue"],
+				"description": "refresh timeout of a message in this queue",
+				"operationId": "refreshMessageTimeout",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "Id of CloudApp",
+					"required": true,
+					"type": "string"
+				},
 				{
-					"name":"app_id",
-					"in":"path",
-					"description":"Id of CloudApp",
-					"required":true,
-					"type":"string"
+					"name": "queue_name",
+					"in": "path",
+					"description": "Name of queue",
+					"required": true,
+					"type": "string"
 				},
-								{
-					"name":"queue_name",
-					"in":"path",
-					"description":"Name of queue",
-					"required":true,
-					"type":"string"
+				{
+					"name": "message_id",
+					"in": "path",
+					"description": "message id",
+					"required": true,
+					"type": "string"
 				},
-												{
-					"name":"message_id",
-					"in":"path",
-					"description":"message id",
-					"required":true,
-					"type":"string"
-				},
-					{
-						"in":"body",
-						"name":"body",
-						"description":"client key of app",
-						"required":true,
-						"schema":{"$ref":"#/definitions/refreshMessageTimeoutBody"}
+				{
+					"in": "body",
+					"name": "body",
+					"description": "client key of app",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/refreshMessageTimeoutBody"
 					}
-				],
-				       "responses": {
+				}],
+				"responses": {
 					"200": {
-							"description": "successfully refreshed timeout",
-							"schema": {"type":"array","items":{"$ref": "#/definitions/QueueMessage"}}																			
-							},
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
+						"description": "successfully refreshed timeout",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/QueueMessage"
+							}
+						}
+					},
+					"default": {
+						"description": "unexpected error"
+					}
+				}
 			}
 		},
-		"/queue/{app_id}/{queue_name}/peek":{
-			"post":{
-				"tags":["CloudQueue"],
-				"description":"peek messages in queue without removing them",
-				"operationId":"peek",
-				"consumes":["application/json"],
-				"produces":["application/json"],
-				"parameters":[
-				{
-					"name":"app_id",
-					"in":"path",
-					"description":"Id of CloudApp",
-					"required":true,
-					"type":"string"
+		"/queue/{app_id}/{queue_name}/peek": {
+			"post": {
+				"tags": ["CloudQueue"],
+				"description": "peek messages in queue without removing them",
+				"operationId": "peek",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "Id of CloudApp",
+					"required": true,
+					"type": "string"
 				},
 				{
-					"name":"queue_name",
-					"in":"path",
-					"description":"Name of queue",
-					"required":true,
-					"type":"string"
+					"name": "queue_name",
+					"in": "path",
+					"description": "Name of queue",
+					"required": true,
+					"type": "string"
 				},
-					{
-						"in":"body",
-						"name":"body",
-						"description":"client key of app",
-						"required":true,
-						"schema":{"$ref":"#/definitions/queuePayloadWithCount"}
+				{
+					"in": "body",
+					"name": "body",
+					"description": "client key of app",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/queuePayloadWithCount"
 					}
-				],
-				       "responses": {
+				}],
+				"responses": {
 					"200": {
-							"description": "peek done",
-							"schema": {"type":"array","items":{"$ref": "#/definitions/QueueMessage"}}																			
-							},
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
+						"description": "peek done",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/QueueMessage"
+							}
+						}
+					},
+					"default": {
+						"description": "unexpected error"
+					}
+				}
 			}
 		},
-		"/queue/{app_id}/{queue_name}/message/{message_id}":{
-			"delete":{
-				"tags":["CloudQueue"],
-				"description":"delete a message in this queue",
-				"operationId":"deleteMessage",
-				"consumes":["application/json"],
-				"produces":["application/json"],
-				"parameters":[
+		"/queue/{app_id}/{queue_name}/message/{message_id}": {
+			"delete": {
+				"tags": ["CloudQueue"],
+				"description": "delete a message in this queue",
+				"operationId": "deleteMessage",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "Id of CloudApp",
+					"required": true,
+					"type": "string"
+				},
 				{
-					"name":"app_id",
-					"in":"path",
-					"description":"Id of CloudApp",
-					"required":true,
-					"type":"string"
+					"name": "queue_name",
+					"in": "path",
+					"description": "Name of queue",
+					"required": true,
+					"type": "string"
 				},
-								{
-					"name":"queue_name",
-					"in":"path",
-					"description":"Name of queue",
-					"required":true,
-					"type":"string"
+				{
+					"name": "message_id",
+					"in": "path",
+					"description": "message id",
+					"required": true,
+					"type": "string"
 				},
-												{
-					"name":"message_id",
-					"in":"path",
-					"description":"message id",
-					"required":true,
-					"type":"string"
-				},
-					{
-						"in":"body",
-						"name":"body",
-						"description":"client key of app",
-						"required":true,
-						"schema":{"$ref":"#/definitions/keyBody"}
+				{
+					"in": "body",
+					"name": "body",
+					"description": "client key of app",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/keyBody"
 					}
-				],
-				       "responses": {
+				}],
+				"responses": {
 					"200": {
-							"description": "successfully deleted message",
-							"schema": {"type":"array","items":{"$ref": "#/definitions/QueueMessage"}}																			
-							},
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
+						"description": "successfully deleted message",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/QueueMessage"
+							}
+						}
+					},
+					"default": {
+						"description": "unexpected error"
+					}
+				}
 			},
-			"post":{
-				"tags":["CloudQueue"],
-				"description":"get a message in this queue by its id",
-				"operationId":"getMessageById",
-				"consumes":["application/json"],
-				"produces":["application/json"],
-				"parameters":[
+			"post": {
+				"tags": ["CloudQueue"],
+				"description": "get a message in this queue by its id",
+				"operationId": "getMessageById",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "Id of CloudApp",
+					"required": true,
+					"type": "string"
+				},
 				{
-					"name":"app_id",
-					"in":"path",
-					"description":"Id of CloudApp",
-					"required":true,
-					"type":"string"
+					"name": "queue_name",
+					"in": "path",
+					"description": "Name of queue",
+					"required": true,
+					"type": "string"
 				},
-								{
-					"name":"queue_name",
-					"in":"path",
-					"description":"Name of queue",
-					"required":true,
-					"type":"string"
+				{
+					"name": "message_id",
+					"in": "path",
+					"description": "message id",
+					"required": true,
+					"type": "string"
 				},
-												{
-					"name":"message_id",
-					"in":"path",
-					"description":"message id",
-					"required":true,
-					"type":"string"
-				},
-					{
-						"in":"body",
-						"name":"body",
-						"description":"client key of app",
-						"required":true,
-						"schema":{"$ref":"#/definitions/keyBody"}
+				{
+					"in": "body",
+					"name": "body",
+					"description": "client key of app",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/keyBody"
 					}
-				],
-				       "responses": {
+				}],
+				"responses": {
 					"200": {
-							"description": "successfully got message",
-							"schema": {"type":"array","items":{"$ref": "#/definitions/QueueMessage"}}																			
-							},
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
+						"description": "successfully got message",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/QueueMessage"
+							}
+						}
+					},
+					"default": {
+						"description": "unexpected error"
+					}
+				}
 			}
 		},
-		"/queue/{app_id}/{queue_name}/subscriber":{
-			"delete":{
-				"tags":["CloudQueue"],
-				"summary":"delete a subscriber to this queue",
-				"description":"delete a subscriber to this queue",
-				"operationId":"deleteSubscriber",
-				"consumes":["application/json"],
-				"produces":["application/json"],
-				"parameters":[
+		"/queue/{app_id}/{queue_name}/subscriber": {
+			"delete": {
+				"tags": ["CloudQueue"],
+				"summary": "delete a subscriber to this queue",
+				"description": "delete a subscriber to this queue",
+				"operationId": "deleteSubscriber",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "Id of CloudApp",
+					"required": true,
+					"type": "string"
+				},
 				{
-					"name":"app_id",
-					"in":"path",
-					"description":"Id of CloudApp",
-					"required":true,
-					"type":"string"
+					"name": "queue_name",
+					"in": "path",
+					"description": "Name of queue",
+					"required": true,
+					"type": "string"
 				},
-								{
-					"name":"queue_name",
-					"in":"path",
-					"description":"Name of queue",
-					"required":true,
-					"type":"string"
-				},
-					{
-						"in":"body",
-						"name":"body",
-						"description":"payload",
-						"required":true,
-						"schema":{"$ref":"#/definitions/QueueBody"}
+				{
+					"in": "body",
+					"name": "body",
+					"description": "payload",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/QueueBody"
 					}
-				],
-				       "responses": {
+				}],
+				"responses": {
 					"200": {
-							"description": "successfully deleted subscriber",
-							"schema": {"type":"array","items":{"$ref": "#/definitions/Queue"}}																			
-							},
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
+						"description": "successfully deleted subscriber",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/Queue"
+							}
+						}
+					},
+					"default": {
+						"description": "unexpected error"
+					}
+				}
 			},
-			"post":{
-				"tags":["CloudQueue"],
-				"description":"add a subscriber to this queue",
-				"operationId":"addSubscriber",
-				"consumes":["application/json"],
-				"produces":["application/json"],
-				"parameters":[
+			"post": {
+				"tags": ["CloudQueue"],
+				"description": "add a subscriber to this queue",
+				"operationId": "addSubscriber",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "Id of CloudApp",
+					"required": true,
+					"type": "string"
+				},
 				{
-					"name":"app_id",
-					"in":"path",
-					"description":"Id of CloudApp",
-					"required":true,
-					"type":"string"
+					"name": "queue_name",
+					"in": "path",
+					"description": "Name of queue",
+					"required": true,
+					"type": "string"
 				},
-								{
-					"name":"queue_name",
-					"in":"path",
-					"description":"Name of queue",
-					"required":true,
-					"type":"string"
-				},
-					{
-						"in":"body",
-						"name":"body",
-						"description":"payload",
-						"required":true,
-						"schema":{"$ref":"#/definitions/QueueBody"}
+				{
+					"in": "body",
+					"name": "body",
+					"description": "payload",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/QueueBody"
 					}
-				],
-				       "responses": {
+				}],
+				"responses": {
 					"200": {
-							"description": "successfully added subscriber",
-							"schema": {"type":"array","items":{"$ref": "#/definitions/Queue"}}																			
-							},
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
+						"description": "successfully added subscriber",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/Queue"
+							}
+						}
+					},
+					"default": {
+						"description": "unexpected error"
+					}
+				}
 			}
 		},
-		"/queue/{app_id}/{queue_name}/message":{
-			"put":{
-				"tags":["CloudQueue"],
-				"description":"push message to queue",
-				"operationId":"push",
-				"consumes":["application/json"],
-				"produces":["application/json"],
-				"parameters":[
-				{
-					"name":"app_id",
-					"in":"path",
-					"description":"Id of CloudApp",
-					"required":true,
-					"type":"string"
+		"/queue/{app_id}/{queue_name}/message": {
+			"put": {
+				"tags": ["CloudQueue"],
+				"description": "push message to queue",
+				"operationId": "push",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "Id of CloudApp",
+					"required": true,
+					"type": "string"
 				},
 				{
-					"name":"queue_name",
-					"in":"path",
-					"description":"Name of queue",
-					"required":true,
-					"type":"string"
+					"name": "queue_name",
+					"in": "path",
+					"description": "Name of queue",
+					"required": true,
+					"type": "string"
 				},
-					{
-						"in":"body",
-						"name":"body",
-						"description":"client key of app",
-						"required":true,
-						"schema":{"$ref":"#/definitions/QueueBody"}
+				{
+					"in": "body",
+					"name": "body",
+					"description": "client key of app",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/QueueBody"
 					}
-				],
-				       "responses": {
+				}],
+				"responses": {
 					"200": {
-							"description": "push done",
-							"schema": {"type":"array","items":{"$ref": "#/definitions/QueueMessage"}}																			
-							},
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
+						"description": "push done",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/QueueMessage"
+							}
+						}
+					},
+					"default": {
+						"description": "unexpected error"
+					}
+				}
 			}
 		},
-		"/queue/{app_id}/{queue_name}":{
-			"delete":{
-				"tags":["CloudQueue"],
-				"description":"delete queue",
-				"operationId":"deleteQueue",
-				"consumes":["application/json"],
-				"produces":["application/json"],
-				"parameters":[
-				{
-					"name":"app_id",
-					"in":"path",
-					"description":"Id of CloudApp",
-					"required":true,
-					"type":"string"
+		"/queue/{app_id}/{queue_name}": {
+			"delete": {
+				"tags": ["CloudQueue"],
+				"description": "delete queue",
+				"operationId": "deleteQueue",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "Id of CloudApp",
+					"required": true,
+					"type": "string"
 				},
 				{
-					"name":"queue_name",
-					"in":"path",
-					"description":"Name of queue",
-					"required":true,
-					"type":"string"
+					"name": "queue_name",
+					"in": "path",
+					"description": "Name of queue",
+					"required": true,
+					"type": "string"
 				},
-					{
-						"in":"body",
-						"name":"body",
-						"description":"client key of app",
-						"required":true,
-						"schema":{"$ref":"#/definitions/QueueBody"}
+				{
+					"in": "body",
+					"name": "body",
+					"description": "client key of app",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/QueueBody"
 					}
-				],
-				       "responses": {
+				}],
+				"responses": {
 					"200": {
-							"description": "success",
-							"schema": {"type":"array","items":{"$ref": "#/definitions/Queue"}}																			
-							},
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
+						"description": "success",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/Queue"
+							}
+						}
+					},
+					"default": {
+						"description": "unexpected error"
+					}
+				}
 			},
-			"post":{
-				"tags":["CloudQueue"],
-				"description":"get queue",
-				"operationId":"getQueue",
-				"consumes":["application/json"],
-				"produces":["application/json"],
-				"parameters":[
-				{
-					"name":"app_id",
-					"in":"path",
-					"description":"Id of CloudApp",
-					"required":true,
-					"type":"string"
+			"post": {
+				"tags": ["CloudQueue"],
+				"description": "get queue",
+				"operationId": "getQueue",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "Id of CloudApp",
+					"required": true,
+					"type": "string"
 				},
 				{
-					"name":"queue_name",
-					"in":"path",
-					"description":"Name of queue",
-					"required":true,
-					"type":"string"
+					"name": "queue_name",
+					"in": "path",
+					"description": "Name of queue",
+					"required": true,
+					"type": "string"
 				},
-					{
-						"in":"body",
-						"name":"body",
-						"description":"client key of app",
-						"required":true,
-						"schema":{"$ref":"#/definitions/keyBody"}
+				{
+					"in": "body",
+					"name": "body",
+					"description": "client key of app",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/keyBody"
 					}
-				],
-				       "responses": {
+				}],
+				"responses": {
 					"200": {
-							"description": "success",
-							"schema": {"$ref": "#/definitions/Queue"}																			
-							},
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
+						"description": "success",
+						"schema": {
+							"$ref": "#/definitions/Queue"
+						}
+					},
+					"default": {
+						"description": "unexpected error"
+					}
+				}
 			},
-			"put":{
-				"tags":["CloudQueue"],
-				"description":"update queue",
-				"operationId":"updateQueue",
-				"consumes":["application/json"],
-				"produces":["application/json"],
-				"parameters":[
-				{
-					"name":"app_id",
-					"in":"path",
-					"description":"Id of CloudApp",
-					"required":true,
-					"type":"string"
+			"put": {
+				"tags": ["CloudQueue"],
+				"description": "update queue",
+				"operationId": "updateQueue",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "Id of CloudApp",
+					"required": true,
+					"type": "string"
 				},
 				{
-					"name":"queue_name",
-					"in":"path",
-					"description":"Name of queue",
-					"required":true,
-					"type":"string"
+					"name": "queue_name",
+					"in": "path",
+					"description": "Name of queue",
+					"required": true,
+					"type": "string"
 				},
-					{
-						"in":"body",
-						"name":"body",
-						"description":"client key of app",
-						"required":true,
-						"schema":{"$ref":"#/definitions/modifiedQueueBody"}
+				{
+					"in": "body",
+					"name": "body",
+					"description": "client key of app",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/modifiedQueueBody"
 					}
-				],
-				       "responses": {
+				}],
+				"responses": {
 					"200": {
-							"description": "success",
-							"schema": {"$ref": "#/definitions/modifiedQueue"}																			
-							},
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
+						"description": "success",
+						"schema": {
+							"$ref": "#/definitions/modifiedQueue"
+						}
+					},
+					"default": {
+						"description": "unexpected error"
+					}
+				}
 			}
 		},
-		"/queue/{app_id}/{queue_name}/pull":{
-			"post":{
-				"tags":["CloudQueue"],
-				"description":"pull messages from queue",
-				"operationId":"pull",
-				"consumes":["application/json"],
-				"produces":["application/json"],
-				"parameters":[
-				{
-					"name":"app_id",
-					"in":"path",
-					"description":"Id of CloudApp",
-					"required":true,
-					"type":"string"
+		"/queue/{app_id}/{queue_name}/pull": {
+			"post": {
+				"tags": ["CloudQueue"],
+				"description": "pull messages from queue",
+				"operationId": "pull",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "Id of CloudApp",
+					"required": true,
+					"type": "string"
 				},
 				{
-					"name":"queue_name",
-					"in":"path",
-					"description":"Name of queue",
-					"required":true,
-					"type":"string"
+					"name": "queue_name",
+					"in": "path",
+					"description": "Name of queue",
+					"required": true,
+					"type": "string"
 				},
-					{
-						"in":"body",
-						"name":"body",
-						"description":"client key of app",
-						"required":true,
-						"schema":{"$ref":"#/definitions/queuePayloadWithCount"}
+				{
+					"in": "body",
+					"name": "body",
+					"description": "client key of app",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/queuePayloadWithCount"
 					}
-				],
-				       "responses": {
+				}],
+				"responses": {
 					"200": {
-							"description": "success",
-							"schema": {"type":"array","items":{"$ref": "#/definitions/QueueMessage"}}																			
-							},
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
+						"description": "success",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/QueueMessage"
+							}
+						}
+					},
+					"default": {
+						"description": "unexpected error"
+					}
+				}
 			}
 		},
-	"/queue/{app_id}/{queue_name}/clear":{
-			"delete":{
-				"tags":["CloudQueue"],
-				"description":"clear queue",
-				"operationId":"clear",
-				"consumes":["application/json"],
-				"produces":["application/json"],
-				"parameters":[
-				{
-					"name":"app_id",
-					"in":"path",
-					"description":"Id of CloudApp",
-					"required":true,
-					"type":"string"
+		"/queue/{app_id}/{queue_name}/clear": {
+			"delete": {
+				"tags": ["CloudQueue"],
+				"description": "clear queue",
+				"operationId": "clear",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "Id of CloudApp",
+					"required": true,
+					"type": "string"
 				},
 				{
-					"name":"queue_name",
-					"in":"path",
-					"description":"Name of queue",
-					"required":true,
-					"type":"string"
+					"name": "queue_name",
+					"in": "path",
+					"description": "Name of queue",
+					"required": true,
+					"type": "string"
 				},
-					{
-						"in":"body",
-						"name":"body",
-						"description":"client key of app",
-						"required":true,
-						"schema":{"$ref":"#/definitions/QueueBody"}
+				{
+					"in": "body",
+					"name": "body",
+					"description": "client key of app",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/QueueBody"
 					}
-				],
-				       "responses": {
+				}],
+				"responses": {
 					"200": {
-							"description": "success",
-							"schema": {"type":"array","items":{"$ref": "#/definitions/Queue"}}																			
-							},
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
+						"description": "success",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/Queue"
+							}
+						}
+					},
+					"default": {
+						"description": "unexpected error"
+					}
+				}
 			}
 		},
-		"/queue/{app_id}":{
-			"post":{
-				"tags":["CloudQueue"],
-				"description":"get all queues",
-				"operationId":"getAllQueues",
-				"consumes":["application/json"],
-				"produces":["application/json"],
-				"parameters":[
-				{
-					"name":"app_id",
-					"in":"path",
-					"description":"Id of CloudApp",
-					"required":true,
-					"type":"string"
+		"/queue/{app_id}": {
+			"post": {
+				"tags": ["CloudQueue"],
+				"description": "get all queues",
+				"operationId": "getAllQueues",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "Id of CloudApp",
+					"required": true,
+					"type": "string"
 				},
-					{
-						"in":"body",
-						"name":"body",
-						"description":"client key of app",
-						"required":true,
-						"schema":{"$ref":"#/definitions/keyBody"}
+				{
+					"in": "body",
+					"name": "body",
+					"description": "client key of app",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/keyBody"
 					}
-				],
-				       "responses": {
+				}],
+				"responses": {
 					"200": {
-							"description": "success",
-							"schema": {"type":"array","items":{"$ref": "#/definitions/Queue"}}																			
-							},
-                    "default": {
-                        "description": "unexpected error"
-                    }
-                }
+						"description": "success",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/Queue"
+							}
+						}
+					},
+					"default": {
+						"description": "unexpected error"
+					}
+				}
 			}
 		},
-"/file/{app_id}":{
-	"post":{
-		"tags":["CloudFile"],
-		"summary":"uploads a file",
-		"description":"",
-		"operationId":"save",
-		"consumes":["multipart/form-data"],
-		"produces":["application/json"],
-		"parameters":[
-		{"name":"app_id",
-		"in":"path",
-		"description":"ID of app",
-		"required":true,
-		"type":"string"
+		"/file/{app_id}": {
+			"post": {
+				"tags": ["CloudFile"],
+				"summary": "uploads a file",
+				"description": "",
+				"operationId": "save",
+				"consumes": ["multipart/form-data"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "ID of app",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "key",
+					"in": "formData",
+					"description": "app key",
+					"required": false,
+					"type": "string"
+				},
+				{
+					"name": "fileObj",
+					"in": "formData",
+					"description": "file extra data",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/fileObj"
+					}
+				},
+				{
+					"name": "fileToUpload",
+					"in": "formData",
+					"description": "file to upload",
+					"required": false,
+					"type": "file"
+				}],
+				"responses": {
+					"200": {
+						"description": "successful operation",
+						"type": "string"
+					}
+				}
+			}
 		},
-		{
-			"name":"key",
-			"in":"formData",
-			"description":"app key",
-			"required":false,
-			"type":"string"
+		"/file/{app_id}/{file_id}": {
+			"delete": {
+				"tags": ["CloudFile"],
+				"summary": "deletes file",
+				"description": "",
+				"operationId": "delete",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "ID of app",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "file_id",
+					"in": "path",
+					"description": "file id",
+					"required": false,
+					"type": "string"
+				},
+				{
+					"name": "body",
+					"in": "body",
+					"description": "request body",
+					"required": false,
+					"schema": {
+						"$ref": "#/definitions/roleBody"
+					}
+				}],
+				"responses": {
+					"200": {
+						"description": "successful operation",
+						"type": "string"
+					}
+				}
 			},
-					{
-			"name":"fileObj",
-			"in":"formData",
-			"description":"file extra data",
-			"required":true,
-			"schema":{"$ref":"#/definitions/fileObj"}
+			"post": {
+				"tags": ["CloudFile"],
+				"summary": "fetch file content",
+				"description": "",
+				"operationId": "fetch file content",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "ID of app",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "file_id",
+					"in": "path",
+					"description": "file id",
+					"required": false,
+					"type": "string"
+				},
+				{
+					"name": "body",
+					"in": "body",
+					"description": "request body",
+					"required": false,
+					"schema": {
+						"$ref": "#/definitions/keyBody"
+					}
+				}],
+				"responses": {
+					"200": {
+						"description": "successful operation",
+						"type": "string"
+					}
+				}
+			}
+		},
+		"/data/{app_id}/{_tableName}": {
+			"put": {
+				"tags": ["CloudRole"],
+				"summary": "create a new cloudrole",
+				"description": "",
+				"operationId": "save",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "ID of app",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "_tableName",
+					"in": "path",
+					"description": "file id",
+					"required": false,
+					"type": "string"
+				},
+				{
+					"name": "body",
+					"in": "body",
+					"description": "request body",
+					"required": false,
+					"schema": {
+						"$ref": "#/definitions/roleBody"
+					}
+				}],
+				"responses": {
+					"200": {
+						"description": "successful operation",
+						"type": "string"
+					}
+				}
+			}
+		},
+		"/user/{app_id}/signup": {
+			"post": {
+				"tags": ["CloudUser"],
+				"summary": "create a new user",
+				"description": "",
+				"operationId": "signUp",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "ID of app",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "body",
+					"in": "body",
+					"description": "request body",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/userBody"
+					}
+				}],
+				"responses": {
+					"200": {
+						"description": "successful operation",
+						"schema": {
+							"$ref": "#/definitions/userSignupResponse"
+						}
+					},
+					"401": {
+						"description": "app id or app key is invalid",
+						"type": "string"
+					}
+				}
+			}
+		},
+		"/user/{app_id}/login": {
+			"post": {
+				"tags": ["CloudUser"],
+				"summary": "login existing user",
+				"description": "",
+				"operationId": "login",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "ID of app",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "body",
+					"in": "body",
+					"description": "request body",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/userBody"
+					}
+				}],
+				"responses": {
+					"200": {
+						"description": "successful operation",
+						"schema": {
+							"$ref": "#/definitions/userSignupResponse"
+						}
+					},
+					"401": {
+						"description": "app id or app key is invalid",
+						"type": "string"
+					},
+					"400": {
+						"description": "check login credentials",
+						"type": "string"
+					}
+				}
+			}
+		},
+		"/user/{app_id}/logout": {
+			"post": {
+				"tags": ["CloudUser"],
+				"summary": "logout user",
+				"description": "",
+				"operationId": "logout",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "ID of app",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "body",
+					"in": "body",
+					"description": "request body",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/userBody"
+					}
+				}],
+				"responses": {
+					"200": {
+						"description": "successful operation",
+						"schema": {
+							"$ref": "#/definitions/userSignupResponse"
+						}
+					},
+					"401": {
+						"description": "app id or app key is invalid",
+						"type": "string"
+					}
+				}
+			}
+		},
+		"/user/{app_id}/addToRole": {
+			"put": {
+				"tags": ["CloudUser"],
+				"summary": "add a user to a role",
+				"description": "",
+				"operationId": "addToRole",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "ID of app",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "body",
+					"in": "body",
+					"description": "request body",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/userRoleBody"
+					}
+				}],
+				"responses": {
+					"200": {
+						"description": "successful operation",
+						"schema": {
+							"$ref": "#/definitions/userSignupResponse"
+						}
+					},
+					"401": {
+						"description": "app id or app key is invalid",
+						"type": "string"
+					}
+				}
+			}
+		},
+		"/user/{app_id}/removeFromRole": {
+			"put": {
+				"tags": ["CloudUser"],
+				"summary": "remove a user from a role",
+				"description": "",
+				"operationId": "removeFromRole",
+				"consumes": ["application/json"],
+				"produces": ["application/json"],
+				"parameters": [{
+					"name": "app_id",
+					"in": "path",
+					"description": "ID of app",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"name": "body",
+					"in": "body",
+					"description": "request body",
+					"required": true,
+					"schema": {
+						"$ref": "#/definitions/userRoleBody"
+					}
+				}],
+				"responses": {
+					"200": {
+						"description": "successful operation",
+						"schema": {
+							"$ref": "#/definitions/userSignupResponse"
+						}
+					},
+					"401": {
+						"description": "app id or app key is invalid",
+						"type": "string"
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"queuePayloadWithCount": {
+			"type": "object",
+			"properties": {
+				"count": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"key": {
+					"type": "string",
+					"default": "app_key"
+				}
+			}
+		},
+		"refreshMessageTimeoutBody": {
+			"type": "object",
+			"properties": {
+				"timeout": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"key": {
+					"type": "string",
+					"default": "app_key"
+				}
+			}
+		},
+		"keyBody": {
+			"type": "object",
+			"properties": {
+				"key": {
+					"type": "string",
+					"default": "app_key"
+				}
+			}
+		},
+		"cacheItem": {
+			"type": "object",
+			"properties": {
+				"item": {
+					"type": "string"
+				},
+				"key": {
+					"type": "string",
+					"default": "data_key"
+				}
+			}
+		},
+		"allow": {
+			"type": "object",
+			"properties": {
+				"user": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"default": ["all"]
+				},
+				"role": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"default": []
+				}
+			}
+		},
+		"deny": {
+			"type": "object",
+			"properties": {
+				"user": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"default": []
+				},
+				"role": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"default": []
+				}
+			}
+		},
+		"read": {
+			"type": "object",
+			"properties": {
+				"allow": {
+					"$ref": "#/definitions/allow"
+				},
+				"deny": {
+					"$ref": "#/definitions/deny"
+				}
+			}
+		},
+		"write": {
+			"type": "object",
+			"properties": {
+				"allow": {
+					"$ref": "#/definitions/allow"
+				},
+				"deny": {
+					"$ref": "#/definitions/deny"
+				}
+			}
+		},
+		"ACL": {
+			"type": "object",
+			"properties": {
+				"read": {
+					"$ref": "#/definitions/read"
+				},
+				"write": {
+					"$ref": "#/definitions/write"
+				}
+			}
+		},
+		"saveObjectResponse": {
+			"type": "object",
+			"properties": {
+				"ACL": {
+					"$ref": "#/definitions/ACL"
+				},
+				"_id": {
+					"type": "string"
+				},
+				"_tableName": {
+					"type": "string"
+				},
+				"_type": {
+					"type": "string"
+				},
+				"createdAt": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"updatedAt": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"expires": {
+					"type": "string",
+					"format": "date-time"
+				},
+				"_version": {
+					"type": "integer",
+					"format": "int64"
+				},
+				"_hash": {
+					"type": "string"
+				},
+				"_modifiedColumns": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"_isModified": {
+					"type": "boolean",
+					"default": true
+				}
+			},
+			"xml": {
+				"name": "document"
+			}
+		},
+		"document": {
+			"type": "object",
+			"properties": {
+				"ACL": {
+					"$ref": "#/definitions/ACL"
+				},
+				"_tableName": {
+					"type": "string"
+				},
+				"_type": {
+					"type": "string",
+					"default": "custom"
+				},
+				"expires": {
+					"type": ["string",
+					"null"],
+					"format": "date-time"
+				},
+				"_hash": {
+					"type": "uuid"
+				},
+				"_modifiedColumns": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"default": ["createdAt",
+					"updatedAt",
+					"ACL",
+					"expires"]
+				},
+				"_isModified": {
+					"type": "boolean",
+					"default": true
+				}
+			},
+			"xml": {
+				"name": "document"
+			}
+		},
+		"QueueMessage": {
+			"type": "object",
+			"properties": {
+				"ACL": {
+					"$ref": "#/definitions/ACL"
+				},
+				"_type": {
+					"type": "string",
+					"default": "queue-message"
+				},
+				"expires": {
+					"type": "string",
+					"format": "date-time",
+					"default": "null"
+				},
+				"_id": {
+					"type": "string",
+					"default": "null"
+				},
+				"delay": {
+					"type": "string",
+					"format": "date-time",
+					"default": "null"
+				},
+				"timeout": {
+					"type": "integer",
+					"format": "int64",
+					"default": 1800
+				},
+				"_modifiedColumns": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"default": ["createdAt",
+					"updatedAt",
+					"ACL",
+					"expires",
+					"timeout",
+					"delay",
+					"message"]
+				},
+				"_isModified": {
+					"type": "boolean",
+					"default": true
+				},
+				"message": {
+					"type": "string",
+					"default": "message"
+				}
+			},
+			"xml": {
+				"name": "QueueMessage"
+			}
+		},
+		"Queue": {
+			"type": "object",
+			"properties": {
+				"ACL": {
+					"$ref": "#/definitions/ACL"
+				},
+				"_type": {
+					"type": "string",
+					"default": "queue"
+				},
+				"expires": {
+					"type": "string",
+					"format": "date-time",
+					"default": "null"
+				},
+				"queueType": {
+					"type": "string",
+					"default": "pull"
+				},
+				"retry": {
+					"type": "string",
+					"nullable": true
+				},
+				"name": {
+					"type": "string",
+					"x-isnullable": true
+				},
+				"subscribers": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"default": []
+				},
+				"messages": {
+					"type": "array",
+					"items": {
+						"type": {
+							"$ref": "#definitions/QueueMessage"
+						}
+					}
+				}
+			},
+			"xml": {
+				"name": "Queue"
+			}
+		},
+		"modifiedQueue": {
+			"type": "object",
+			"properties": {
+				"ACL": {
+					"$ref": "#/definitions/ACL"
+				},
+				"_type": {
+					"type": "string",
+					"default": "queue"
+				},
+				"expires": {
+					"type": "string",
+					"format": "date-time",
+					"default": "null"
+				},
+				"queueType": {
+					"type": "string",
+					"default": "pull"
+				},
+				"retry": {
+					"type": "string",
+					"default": "null"
+				},
+				"name": {
+					"type": "string",
+					"default": "null"
+				},
+				"subscribers": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"default": []
+				},
+				"_isModified": {
+					"type": "boolean",
+					"default": true
+				},
+				"_modifiedColumns": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"default": ["queueType"]
+				},
+				"messages": {
+					"type": "array",
+					"items": {
+						"type": {
+							"$ref": "#definitions/QueueMessage"
+						}
+					}
+				}
+			},
+			"xml": {
+				"name": "modifiedQueue"
+			}
+		},
+		"modifiedQueueBody": {
+			"type": "object",
+			"properties": {
+				"document": {
+					"$ref": "#/definitions/modifiedQueue"
+				},
+				"key": {
+					"type": "string",
+					"default": "app_key"
+				}
+			},
+			"xml": {
+				"name": "modifiedQueueBody"
+			}
+		},
+		"QueueBody": {
+			"type": "object",
+			"properties": {
+				"document": {
+					"$ref": "#/definitions/Queue"
+				},
+				"key": {
+					"type": "string",
+					"default": "app_key"
+				}
+			},
+			"xml": {
+				"name": "QueueBody"
+			}
+		},
+		"body": {
+			"type": "object",
+			"properties": {
+				"key": {
+					"type": "string"
+				},
+				"document": {
+					"$ref": "#/definitions/document"
+				}
+			}
+		},
+		"objectArray": {
+			"type": "object",
+			"properties": {
+				"key": {
+					"type": "string"
+				},
+				"document": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/document"
+					}
+				}
+			}
+		},
+		"fileObj": {
+			"type": "object",
+			"properties": {
+				"_id": {
+					"type": "string",
+					"nullable": true
+				},
+				"_type": {
+					"type": "string",
+					"default": "file"
+				},
+				"ACL": {
+					"$ref": "#/definitions/ACL"
+				},
+				"name": {
+					"type": "string"
+				},
+				"size": {
+					"type": "number",
+					"format": "float"
+				},
+				"url": {
+					"type": "string",
+					"nullable": true
+				},
+				"expires": {
+					"type": "string",
+					"format": "date-time",
+					"nullable": true
+				},
+				"contentType": {
+					"type": "string",
+					"default": "application/octet-stream"
+				}
+			},
+			"xml": {
+				"name": "QueueBody"
+			}
+		},
+		"fileBody": {
+			"type": "object",
+			"properties": {
+				"key": {
+					"type": "string"
+				},
+				"fileObj": {
+					"$ref": "#/definitions/fileObj"
+				}
+			},
+			"xml": {
+				"name": "QueueBody"
+			}
+		},
+		"role": {
+			"allOf": [{
+				"$ref": "#/definitions/document"
 			},
 			{
-				"name":"fileToUpload",
-				"in":"formData",
-				"description":"file to upload",
-				"required":false,
-				"type":"file"
-				}
-				],
-				"responses":{
-					"200":{
-						"description":"successful operation",
-						"type":"string"
-							}
-						}
-			}
-},
-"/file/{app_id}/{file_id}":{
-	"delete":{
-		"tags":["CloudFile"],
-		"summary":"deletes file",
-		"description":"",
-		"operationId":"delete",
-		"consumes":["application/json"],
-		"produces":["application/json"],
-		"parameters":[
-		{"name":"app_id",
-		"in":"path",
-		"description":"ID of app",
-		"required":true,
-		"type":"string"
-		},
-		{
-			"name":"file_id",
-			"in":"path",
-			"description":"file id",
-			"required":false,
-			"type":"string"
-			},
-		{
-			"name":"body",
-			"in":"body",
-			"description":"request body",
-			"required":false,
-			"schema":{"$ref":"#/definitions/roleBody"}
-			}
-				],
-				"responses":{
-					"200":{
-						"description":"successful operation",
-						"type":"string"
-							}
-						}
-			},
-				"post":{
-		"tags":["CloudFile"],
-		"summary":"fetch file content",
-		"description":"",
-		"operationId":"fetch file content",
-		"consumes":["application/json"],
-		"produces":["application/json"],
-		"parameters":[
-		{"name":"app_id",
-		"in":"path",
-		"description":"ID of app",
-		"required":true,
-		"type":"string"
-		},
-		{
-			"name":"file_id",
-			"in":"path",
-			"description":"file id",
-			"required":false,
-			"type":"string"
-			},
-		{
-			"name":"body",
-			"in":"body",
-			"description":"request body",
-			"required":false,
-			"schema":{"$ref":"#/definitions/keyBody"}
-			}
-				],
-				"responses":{
-					"200":{
-						"description":"successful operation",
-						"type":"string"
-							}
-						}
-			}
-},
-"/data/{app_id}/{_tableName}":{
-	"put":{
-		"tags":["CloudRole"],
-		"summary":"create a new cloudrole",
-		"description":"",
-		"operationId":"save",
-		"consumes":["application/json"],
-		"produces":["application/json"],
-		"parameters":[
-		{"name":"app_id",
-		"in":"path",
-		"description":"ID of app",
-		"required":true,
-		"type":"string"
-		},
-		{
-			"name":"_tableName",
-			"in":"path",
-			"description":"file id",
-			"required":false,
-			"type":"string"
-			},
-		{
-			"name":"body",
-			"in":"body",
-			"description":"request body",
-			"required":false,
-			"schema":{"$ref":"#/definitions/roleBody"}
-			}
-				],
-				"responses":{
-					"200":{
-						"description":"successful operation",
-						"type":"string"
-							}
-						}
-			}
-},
-"/user/{app_id}/signup":{
-	"post":{
-		"tags":["CloudUser"],
-		"summary":"create a new user",
-		"description":"",
-		"operationId":"signUp",
-		"consumes":["application/json"],
-		"produces":["application/json"],
-		"parameters":[
-		{"name":"app_id",
-		"in":"path",
-		"description":"ID of app",
-		"required":true,
-		"type":"string"
-		},
-		{
-			"name":"body",
-			"in":"body",
-			"description":"request body",
-			"required":true,
-			"schema":{"$ref":"#/definitions/userBody"}
-			}
-				],
-				"responses":{
-					"200":{
-						"description":"successful operation",
-						"schema":{"$ref":"#/definitions/userSignupResponse"}
-							},
-					"401":{
-						"description":"app id or app key is invalid",
-						"type":"string"
-							}
-						}
-			}
-},
-"/user/{app_id}/login":{
-	"post":{
-		"tags":["CloudUser"],
-		"summary":"login existing user",
-		"description":"",
-		"operationId":"login",
-		"consumes":["application/json"],
-		"produces":["application/json"],
-		"parameters":[
-		{"name":"app_id",
-		"in":"path",
-		"description":"ID of app",
-		"required":true,
-		"type":"string"
-		},
-		{
-			"name":"body",
-			"in":"body",
-			"description":"request body",
-			"required":true,
-			"schema":{"$ref":"#/definitions/userBody"}
-			}
-				],
-				"responses":{
-					"200":{
-						"description":"successful operation",
-						"schema":{"$ref":"#/definitions/userSignupResponse"}
-							},
-					"401":{
-						"description":"app id or app key is invalid",
-						"type":"string"
-							},
-					"400":{
-						"description":"check login credentials",
-						"type":"string"
-							}
-						}
-			}
-},
-"/user/{app_id}/logout":{
-	"post":{
-		"tags":["CloudUser"],
-		"summary":"logout user",
-		"description":"",
-		"operationId":"logout",
-		"consumes":["application/json"],
-		"produces":["application/json"],
-		"parameters":[
-		{"name":"app_id",
-		"in":"path",
-		"description":"ID of app",
-		"required":true,
-		"type":"string"
-		},
-		{
-			"name":"body",
-			"in":"body",
-			"description":"request body",
-			"required":true,
-			"schema":{"$ref":"#/definitions/userBody"}
-			}
-				],
-				"responses":{
-					"200":{
-						"description":"successful operation",
-						"schema":{"$ref":"#/definitions/userSignupResponse"}
-							},
-					"401":{
-						"description":"app id or app key is invalid",
-						"type":"string"
-							}
-						}
-			}
-},
-"/user/{app_id}/addToRole":{
-	"put":{
-		"tags":["CloudUser"],
-		"summary":"add a user to a role",
-		"description":"",
-		"operationId":"addToRole",
-		"consumes":["application/json"],
-		"produces":["application/json"],
-		"parameters":[
-		{"name":"app_id",
-		"in":"path",
-		"description":"ID of app",
-		"required":true,
-		"type":"string"
-		},
-		{
-			"name":"body",
-			"in":"body",
-			"description":"request body",
-			"required":true,
-			"schema":{"$ref":"#/definitions/userRoleBody"}
-			}
-				],
-				"responses":{
-					"200":{
-						"description":"successful operation",
-						"schema":{"$ref":"#/definitions/userSignupResponse"}
-							},
-					"401":{
-						"description":"app id or app key is invalid",
-						"type":"string"
-							}
-						}
-			}
-},
-"/user/{app_id}/removeFromRole":{
-	"put":{
-		"tags":["CloudUser"],
-		"summary":"remove a user from a role",
-		"description":"",
-		"operationId":"removeFromRole",
-		"consumes":["application/json"],
-		"produces":["application/json"],
-		"parameters":[
-		{"name":"app_id",
-		"in":"path",
-		"description":"ID of app",
-		"required":true,
-		"type":"string"
-		},
-		{
-			"name":"body",
-			"in":"body",
-			"description":"request body",
-			"required":true,
-			"schema":{"$ref":"#/definitions/userRoleBody"}
-			}
-				],
-				"responses":{
-					"200":{
-						"description":"successful operation",
-						"schema":{"$ref":"#/definitions/userSignupResponse"}
-							},
-					"401":{
-						"description":"app id or app key is invalid",
-						"type":"string"
-							}
-						}
-			}
-}
-
-
-		
-
-    },
-		"definitions":{
-			"queuePayloadWithCount":{
-				"type":"object",
-				"properties":{
-					"count":{"type":"integer","format":"int64"},
-					"key":{"type":"string","default":"app_key"}
-				}
-			},
-						"refreshMessageTimeoutBody":{
-				"type":"object",
-				"properties":{
-					"timeout":{"type":"integer","format":"int64"},
-					"key":{"type":"string","default":"app_key"}
-				}
-			},
-			"keyBody":{
-				"type":"object",
-				"properties":{
-					"key":{"type":"string","default":"app_key"}
-				}
-			},
-			"cacheItem":{
-				"type":"object",
-				"properties":{
-					"item":{"type":"string"},
-					"key":{"type":"string","default":"data_key"}
-				}
-			},
-				"allow":{
-				"type":"object",
-				"properties":{
-					"user":{"type":"array","items":{"type":"string"},"default":["all"]},
-					"role":{"type":"array","items":{"type":"string"},"default":[]}
-				}
-			},
-						"deny":{
-			  "type":"object",
-				"properties":{
-					"user":{"type":"array","items":{"type":"string"},"default":[]},
-					"role":{"type":"array","items":{"type":"string"},"default":[]}
-				}
-				},
-					
-			
-			"read":{
-				"type":"object",
-				"properties":{
-					"allow":{"$ref":"#/definitions/allow"},
-					"deny":{"$ref":"#/definitions/deny"}
-				}
-			},
-			
-			"write":{
-				"type":"object",
-				"properties":{
-					"allow":{"$ref":"#/definitions/allow"},
-					"deny":{"$ref":"#/definitions/deny"}
-				}
-			},
-					"ACL":{
-				"type":"object",
-				"properties":{
-					"read":{"$ref":"#/definitions/read"},
-					"write":{"$ref":"#/definitions/write"}
-				}
-			},
-				"saveObjectResponse":{
-		"type":"object",
-		"properties":{
-			"ACL":{"$ref":"#/definitions/ACL"},
-			"_id":{"type":"string"},
-			"_tableName":{"type":"string"},
-			"_type":{"type":"string"},
-			"createdAt":{"type":"string","format":"date-time"},
-			"updatedAt":{"type":"string","format":"date-time"},
-			"expires":{"type":"string","format":"date-time"},
-			"_version":{"type":"integer","format":"int64"},
-			"_hash":{"type":"string"},
-			"_modifiedColumns":{"type":"array" ,"items":{"type":"string"}},
-			"_isModified":{"type":"boolean", "default":true}
-			},
-			"xml":{"name":"document"}
-			},
-		"document":{
-		"type":"object",
-		"properties":{
-			"ACL":{"$ref":"#/definitions/ACL"},
-			"_tableName":{"type":"string"},
-			"_type":{"type":"string","default":"custom"},
-		"expires":{"type":["string","null"],"format":"date-time"},
-		"_hash":{"type":"uuid"},
-			"_modifiedColumns":{"type":"array", "items":{"type":"string"},"default":["createdAt","updatedAt","ACL","expires"]},
-			"_isModified":{"type":"boolean", "default":true}
-			},
-			"xml":{"name":"document"}
-			},
-		"QueueMessage":{
-		"type":"object",
-		"properties":{
-			"ACL":{"$ref":"#/definitions/ACL"},
-			"_type":{"type":"string","default":"queue-message"},
-			"expires":{"type":"string","format":"date-time","default":"null"},
-			"_id":{"type":"string","default":"null"},
-			"delay":{"type":"string","format":"date-time","default":"null"},
-			"timeout":{"type":"integer","format":"int64","default":1800},
-			"_modifiedColumns":{"type":"array", "items":{"type":"string"},"default":["createdAt","updatedAt","ACL","expires","timeout","delay","message"]},
-			"_isModified":{"type":"boolean", "default":true},
-			"message":{"type":"string", "default":"message"}
-			},
-			"xml":{"name":"QueueMessage"}
-			},
-		"Queue":{
-		"type":"object",
-		"properties":{
-			"ACL":{"$ref":"#/definitions/ACL"},
-			"_type":{"type":"string","default":"queue"},
-			"expires":{"type":"string","format":"date-time","default":"null"},
-			"queueType":{"type":"string","default":"pull"},
-			"retry":{"type":"string","nullable":true},
-			"name":{"type":"string","x-isnullable":true},
-			"subscribers":{"type":"array", "items":{"type":"string"},"default":[]},
-			"messages":{"type":"array", "items":{"type":{"$ref":"#definitions/QueueMessage"}}}
-			},
-			"xml":{"name":"Queue"}
-			},
-		"modifiedQueue":{
-		"type":"object",
-		"properties":{
-			"ACL":{"$ref":"#/definitions/ACL"},
-			"_type":{"type":"string","default":"queue"},
-			"expires":{"type":"string","format":"date-time","default":"null"},
-			"queueType":{"type":"string","default":"pull"},
-			"retry":{"type":"string","default":"null"},
-			"name":{"type":"string","default":"null"},
-			"subscribers":{"type":"array", "items":{"type":"string"},"default":[]},
-			"_isModified":{"type":"boolean","default":true},
-			"_modifiedColumns":{"type":"array","items":{"type":"string"},"default":["queueType"]},
-			"messages":{"type":"array", "items":{"type":{"$ref":"#definitions/QueueMessage"}}}
-			},
-			"xml":{"name":"modifiedQueue"}
-			},
-		"modifiedQueueBody":{
-		"type":"object",
-		"properties":{
-			"document":{"$ref":"#/definitions/modifiedQueue"},
-			"key":{"type":"string","default":"app_key"}
-			},
-			"xml":{"name":"modifiedQueueBody"}
-			},
-		"QueueBody":{
-		"type":"object",
-		"properties":{
-			"document":{"$ref":"#/definitions/Queue"},
-			"key":{"type":"string","default":"app_key"}
-			},
-			"xml":{"name":"QueueBody"}
-			},
-			"body":{
-				"type":"object",
-				"properties":{
-					"key":{"type":"string"},
-					"document":{"$ref":"#/definitions/document"}
-				}
-			},
-			"objectArray":{
-				"type":"object",
-				"properties":{
-					"key":{"type":"string"},
-					"document":{"type":"array", "items":{"$ref":"#/definitions/document"}}
-				}
-			},
-		"fileObj":{
-		"type":"object",
-		"properties":{
-			"_id":{"type":"string","nullable":true},
-			"_type":{"type":"string","default":"file"},
-			"ACL":{"$ref":"#/definitions/ACL"},
-			"name":{"type":"string"},
-			"size":{"type":"number","format":"float"},
-			"url":{"type":"string","nullable":true},
-			"expires":{"type":"string","format":"date-time","nullable":true},
-			"contentType":{"type":"string","default":"application/octet-stream"}
-			},
-			"xml":{"name":"QueueBody"}
-			},
-		"fileBody":{
-		"type":"object",
-		"properties":{
-			"key":{"type":"string"},
-			"fileObj":{"$ref":"#/definitions/fileObj"}
-			},
-			"xml":{"name":"QueueBody"}
-			},
-		"role":{
-		"allOf":[{"$ref":"#/definitions/document"},
-		{
-			"type":"object",
-		"properties":{
-		"_modifiedColumns":{"type":"array", "items":{"type":"string"},"default":["createdAt","updatedAt","ACL","expires","name"]},
-		"_type":{"type":"string","default":"role"}
-		}
-		}
-		]
-			},
-					"roleBody":{
-		"type":"object",
-		"properties":{
-			"key":{"type":"string"},
-			"document":{"$ref":"#/definitions/role"}
-			},
-			"xml":{"name":"roleBody"}
-			},
-		"user":{
-		"allOf":[{"$ref":"#/definitions/document"},{
-			"type":"object",
-		"properties":{
-		"_type":{"type":"string","default":"user"},
-		"username":{"type":"string","default":"ben"},
-		"password":{"type":"string","format":"password"},
-		"email":{"type":"string","default":"ben@cloudboost.io"},
-		"_tableName":{"type":"string","default":"User"},
-		"_modifiedColumns":{"type":"array", "items":{"type":"string"},"default":["createdAt","updatedAt","ACL","expires","username","password","email"]}
-
-		}
-		}
-		]
-			},
-					"userSignupResponse":{
-		"allOf":[
-		{"$ref":"#/definitions/saveObjectResponse"},
-		{
-			"type":"object",
-		"properties":{
-		"_type":{"type":"string","default":"user"},
-		"username":{"type":"string","default":"ben"},
-		"password":{"type":"string","format":"password"},
-		"email":{"type":"string","default":"ben@cloudboost.io"}
-		}
-		}
-		]
-			},
-			"userBody":{
-		"type":"object",
-		"properties":{
-			"key":{"type":"string"},
-			"document":{"$ref":"#/definitions/user"}
-			},
-			"xml":{"name":"userBody"}
-			},
-		"userRoleBody":{
-		"type":"object",
-		"properties":{
-			"key":{"type":"string"},
-			"document":{"$ref":"#/definitions/user"},
-			"role":{"$ref":"#/definitions/role"},
-			"user":{"$ref":"#/definitions/user"}
-			},
-			"xml":{"name":"userBody"}
-			},
-		"query":{
-		"type":"object",
-		"properties":{
-			"$includeList":{"type":"array","items":{"type":"object"},"default":[]},
-			"$include":{"type":"array","items":{"type":"object"},"default":[]}
-			},
-			"xml":{"name":"userBody"}
-			},
-		"queryId":{
-			"allOf":[
-			{"$ref":"#/definitions/query"},
-			{
-		"type":"object",
-		"properties":{
-			"_id":{"type":"string","default":"uj79dm"}
-			}
-			}
-			]
-			
-			},
-		"queryMaster":{
-		"type":"object",
-		"properties":{
-			"key":{"type":"string"},
-			"skip":{"type":"integer","format":"int64","default":0},
-			"limit":{"type":"integer","format":"int64","default":10},
-			"query":{"$ref":"#/definitions/query"},
-			"sort":{"type":"object"},
-			"select":{"type":"object"}
-			},
-			"xml":{"name":"userBody"}
-			},
-		"queryCount":{
-		"allOf":[
-		{"$ref":"#/definitions/queryMaster"},
-			{"type":"object",
-		"properties":{
-			"sort":{"type":["object","null"]},
-			"select":{"type":["object","null"]}
-			}
-			}
-			]
-			
-			},
-		"queryDistinct":{
-		"allOf":[
-		{"$ref":"#/definitions/queryMaster"},
-			{"type":"object",
-		"properties":{
-			"sort":{"type":["object","null"]},
-			"onKey":{"type":"array","items":{"type":"string"},"default":[]}
-			}
-			}
-			]
-			
-			},
-		"queryFindById":{
-		"allOf":[
-		{"$ref":"#/definitions/queryMaster"},
-			{"type":"object",
-		"properties":{
-			"query":{"$ref":"#/definitions/queryId"},
-			"limit":{"type":"integer","format":"int64","default":1}
-			}
-			}
-			]
-			
-			},
-		"queryFindOne":{
-		"allOf":[
-		{"$ref":"#/definitions/queryMaster"},
-			{"type":"object",
-		"properties":{
-			"limit":{"type":["number","null"]}
-			}
-			}
-			]
-			
-			},
-			"searchMeta":{
-				"type":"object",
-				"properties":{
-					"must_not":{"type":"array","items":{"type":"object"},"default":[]},
-					"should":{"type":"array","items":{"type":"object"},"default":[]},
-					"must":{"type":"array","items":{"type":"object"},"default":[]}
-					}
-			},
-			"searchFilter":{
-			"allOf":[
-			{"$ref":"#/definitions/searchMeta"},	
-			{
-			"type":"object",
-			"properties":{
-					"must_not":{"type":"array","items":{"type":"object"},"default":[{"term":{"age":"12"}}]},
-					"must":{"type":"array","items":{"type":"object"},"default":[{"term":{"age":0}},{"exists":{"field":"subject"}},
-					{"range":{"age":{"gt":19}}},{"range":{"age":{"lt":50}}},{"missing":{"field":"best_friend"}}]
-					}
-					}
-			}
-			]
-		},
-		"searchQuery":{
-				"allOf":[
-				{"$ref":"#/definitions/searchMeta"},
-				{
-				"type":"object",
-				"properties":{
-					"must":{"type":"array","items":{"type":"object"},"default":[{"prefix":{"last_name":{"value":"V","boost":"top"}}}]},
-					"should":{"type":"array","items":{"type":"object"},"default":[{"match":{"name":{"minimum_should_match":"75%","query":"ben",	"boost":"top","fuzziness":"0","operator":"and"}}},{"match":{"subject":{"query":"java","slop":"10","type":"phrase"}}},{"wildcard":{"first_name":{"value":"R*","boost":"top"}}},{"multi_match":{"minimum_should_match":"25%",	"query":"R","boost":"3","type":"most_fields","fuzziness":"0","operator":"and","fields":["name","descrition"]}},{	"multi_match":{"minimum_should_match":"25%","query":"V","boost":"3","type":"best_fields","fuzziness":"0","operator":"and","fields":["name","descrition"]}}]
+				"type": "object",
+				"properties": {
+					"_modifiedColumns": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						},
+						"default": ["createdAt",
+						"updatedAt",
+						"ACL",
+						"expires",
+						"name"]
+					},
+					"_type": {
+						"type": "string",
+						"default": "role"
 					}
 				}
 			}]
-			},
-			"boolQuery":{
-				"type":"object",
-				"properties":{
-					"bool":{"$ref":"#/definitions/searchQuery"}
+		},
+		"roleBody": {
+			"type": "object",
+			"properties": {
+				"key": {
+					"type": "string"
+				},
+				"document": {
+					"$ref": "#/definitions/role"
 				}
 			},
-			"boolFilter":{
-				"type":"object",
-				"properties":{
-					"bool":{"$ref":"#/definitions/searchFilter"}
-				}
+			"xml": {
+				"name": "roleBody"
+			}
+		},
+		"user": {
+			"allOf": [{
+				"$ref": "#/definitions/document"
 			},
-			"filtered":{
-				"type":"object",
-				"properties":{
-					"query":{"$ref":"#/definitions/boolQuery"},
-					"filter":{"$ref":"#/definitions/boolFilter"}
-					}
-			},
-			"combineFiltered":{
-				"type":"object",
-				"properties":{
-					"filtered":{"$ref":"#/definitions/filtered"}
-					}
-			},
-		"searchBody":{
-			"allOf":[
-			{"$ref":"#/definitions/queryMaster"},
 			{
-		"type":"object",
-		"properties":{
-			"query":{"$ref":"#/definitions/combineFiltered"},
-			"sort":{"type":"array","items":{"type":"object"},"default":[{"age":{"order":"asc"}},{"first_name":{"order":"desc"}}]},
-			"collectionName":{"type":"string","default":"table_name_here"},
-			"select":{"type":["string","null"]}
+				"type": "object",
+				"properties": {
+					"_type": {
+						"type": "string",
+						"default": "user"
+					},
+					"username": {
+						"type": "string",
+						"default": "ben"
+					},
+					"password": {
+						"type": "string",
+						"format": "password"
+					},
+					"email": {
+						"type": "string",
+						"default": "ben@cloudboost.io"
+					},
+					"_tableName": {
+						"type": "string",
+						"default": "User"
+					},
+					"_modifiedColumns": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						},
+						"default": ["createdAt",
+						"updatedAt",
+						"ACL",
+						"expires",
+						"username",
+						"password",
+						"email"]
+					}
+				}
+			}]
+		},
+		"userSignupResponse": {
+			"allOf": [{
+				"$ref": "#/definitions/saveObjectResponse"
 			},
-			"xml":{"name":"userBody"}
-		}]}
-
-			
+			{
+				"type": "object",
+				"properties": {
+					"_type": {
+						"type": "string",
+						"default": "user"
+					},
+					"username": {
+						"type": "string",
+						"default": "ben"
+					},
+					"password": {
+						"type": "string",
+						"format": "password"
+					},
+					"email": {
+						"type": "string",
+						"default": "ben@cloudboost.io"
+					}
+				}
+			}]
+		},
+		"userBody": {
+			"type": "object",
+			"properties": {
+				"key": {
+					"type": "string"
+				},
+				"document": {
+					"$ref": "#/definitions/user"
+				}
+			},
+			"xml": {
+				"name": "userBody"
+			}
+		},
+		"userRoleBody": {
+			"type": "object",
+			"properties": {
+				"key": {
+					"type": "string"
+				},
+				"document": {
+					"$ref": "#/definitions/user"
+				},
+				"role": {
+					"$ref": "#/definitions/role"
+				},
+				"user": {
+					"$ref": "#/definitions/user"
+				}
+			},
+			"xml": {
+				"name": "userBody"
+			}
+		},
+		"query": {
+			"type": "object",
+			"properties": {
+				"$includeList": {
+					"type": "array",
+					"items": {
+						"type": "object"
+					},
+					"default": []
+				},
+				"$include": {
+					"type": "array",
+					"items": {
+						"type": "object"
+					},
+					"default": []
+				}
+			},
+			"xml": {
+				"name": "userBody"
+			}
+		},
+		"queryId": {
+			"allOf": [{
+				"$ref": "#/definitions/query"
+			},
+			{
+				"type": "object",
+				"properties": {
+					"_id": {
+						"type": "string",
+						"default": "uj79dm"
+					}
+				}
+			}]
+		},
+		"queryMaster": {
+			"type": "object",
+			"properties": {
+				"key": {
+					"type": "string"
+				},
+				"skip": {
+					"type": "integer",
+					"format": "int64",
+					"default": 0
+				},
+				"limit": {
+					"type": "integer",
+					"format": "int64",
+					"default": 10
+				},
+				"query": {
+					"$ref": "#/definitions/query"
+				},
+				"sort": {
+					"type": "object"
+				},
+				"select": {
+					"type": "object"
+				}
+			},
+			"xml": {
+				"name": "userBody"
+			}
+		},
+		"queryCount": {
+			"allOf": [{
+				"$ref": "#/definitions/queryMaster"
+			},
+			{
+				"type": "object",
+				"properties": {
+					"sort": {
+						"type": ["object",
+						"null"]
+					},
+					"select": {
+						"type": ["object",
+						"null"]
+					}
+				}
+			}]
+		},
+		"queryDistinct": {
+			"allOf": [{
+				"$ref": "#/definitions/queryMaster"
+			},
+			{
+				"type": "object",
+				"properties": {
+					"sort": {
+						"type": ["object",
+						"null"]
+					},
+					"onKey": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						},
+						"default": []
+					}
+				}
+			}]
+		},
+		"queryFindById": {
+			"allOf": [{
+				"$ref": "#/definitions/queryMaster"
+			},
+			{
+				"type": "object",
+				"properties": {
+					"query": {
+						"$ref": "#/definitions/queryId"
+					},
+					"limit": {
+						"type": "integer",
+						"format": "int64",
+						"default": 1
+					}
+				}
+			}]
+		},
+		"queryFindOne": {
+			"allOf": [{
+				"$ref": "#/definitions/queryMaster"
+			},
+			{
+				"type": "object",
+				"properties": {
+					"limit": {
+						"type": ["number",
+						"null"]
+					}
+				}
+			}]
+		},
+		"searchMeta": {
+			"type": "object",
+			"properties": {
+				"must_not": {
+					"type": "array",
+					"items": {
+						"type": "object"
+					},
+					"default": []
+				},
+				"should": {
+					"type": "array",
+					"items": {
+						"type": "object"
+					},
+					"default": []
+				},
+				"must": {
+					"type": "array",
+					"items": {
+						"type": "object"
+					},
+					"default": []
+				}
+			}
+		},
+		"searchFilter": {
+			"allOf": [{
+				"$ref": "#/definitions/searchMeta"
+			},
+			{
+				"type": "object",
+				"properties": {
+					"must_not": {
+						"type": "array",
+						"items": {
+							"type": "object"
+						},
+						"default": [{
+							"term": {
+								"age": "12"
+							}
+						}]
+					},
+					"must": {
+						"type": "array",
+						"items": {
+							"type": "object"
+						},
+						"default": [{
+							"term": {
+								"age": 0
+							}
+						},
+						{
+							"exists": {
+								"field": "subject"
+							}
+						},
+						{
+							"range": {
+								"age": {
+									"gt": 19
+								}
+							}
+						},
+						{
+							"range": {
+								"age": {
+									"lt": 50
+								}
+							}
+						},
+						{
+							"missing": {
+								"field": "best_friend"
+							}
+						}]
+					}
+				}
+			}]
+		},
+		"searchQuery": {
+			"allOf": [{
+				"$ref": "#/definitions/searchMeta"
+			},
+			{
+				"type": "object",
+				"properties": {
+					"must": {
+						"type": "array",
+						"items": {
+							"type": "object"
+						},
+						"default": [{
+							"prefix": {
+								"last_name": {
+									"value": "V",
+									"boost": "top"
+								}
+							}
+						}]
+					},
+					"should": {
+						"type": "array",
+						"items": {
+							"type": "object"
+						},
+						"default": [{
+							"match": {
+								"name": {
+									"minimum_should_match": "75%",
+									"query": "ben",
+									"boost": "top",
+									"fuzziness": "0",
+									"operator": "and"
+								}
+							}
+						},
+						{
+							"match": {
+								"subject": {
+									"query": "java",
+									"slop": "10",
+									"type": "phrase"
+								}
+							}
+						},
+						{
+							"wildcard": {
+								"first_name": {
+									"value": "R*",
+									"boost": "top"
+								}
+							}
+						},
+						{
+							"multi_match": {
+								"minimum_should_match": "25%",
+								"query": "R",
+								"boost": "3",
+								"type": "most_fields",
+								"fuzziness": "0",
+								"operator": "and",
+								"fields": ["name",
+								"descrition"]
+							}
+						},
+						{
+							"multi_match": {
+								"minimum_should_match": "25%",
+								"query": "V",
+								"boost": "3",
+								"type": "best_fields",
+								"fuzziness": "0",
+								"operator": "and",
+								"fields": ["name",
+								"descrition"]
+							}
+						}]
+					}
+				}
+			}]
+		},
+		"boolQuery": {
+			"type": "object",
+			"properties": {
+				"bool": {
+					"$ref": "#/definitions/searchQuery"
+				}
+			}
+		},
+		"boolFilter": {
+			"type": "object",
+			"properties": {
+				"bool": {
+					"$ref": "#/definitions/searchFilter"
+				}
+			}
+		},
+		"filtered": {
+			"type": "object",
+			"properties": {
+				"query": {
+					"$ref": "#/definitions/boolQuery"
+				},
+				"filter": {
+					"$ref": "#/definitions/boolFilter"
+				}
+			}
+		},
+		"combineFiltered": {
+			"type": "object",
+			"properties": {
+				"filtered": {
+					"$ref": "#/definitions/filtered"
+				}
+			}
+		},
+		"searchBody": {
+			"allOf": [{
+				"$ref": "#/definitions/queryMaster"
+			},
+			{
+				"type": "object",
+				"properties": {
+					"query": {
+						"$ref": "#/definitions/combineFiltered"
+					},
+					"sort": {
+						"type": "array",
+						"items": {
+							"type": "object"
+						},
+						"default": [{
+							"age": {
+								"order": "asc"
+							}
+						},
+						{
+							"first_name": {
+								"order": "desc"
+							}
+						}]
+					},
+					"collectionName": {
+						"type": "string",
+						"default": "table_name_here"
+					},
+					"select": {
+						"type": ["string",
+						"null"]
+					}
+				},
+				"xml": {
+					"name": "userBody"
+				}
+			}]
+		}
 	},
-	"externalDocs":{"description":"Find out more about CloudBoost API","url":"https://docs.cloudboost.io"}
+	"externalDocs": {
+		"description": "Find out more about CloudBoost API",
+		"url": "https://docs.cloudboost.io"
+	}
 }

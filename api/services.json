@@ -1,0 +1,221 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "CloudBoost Services API",
+        "description": "Power your web or mobile application backend with cloudboost Database Service",
+        "termsOfService": "http://helloreverb.com/terms/",
+        "contact": {
+            "name": "Benedict Egima",
+            "email": "ben@cloudboost.io",
+            "url": "https://cloudboost.io"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "http://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "service.cloudboost.io",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+			"/table":{
+			"post":{
+				"tags":["CloudTable"],
+				"description":"get all tables in app",
+				"operationId":"getAll",
+				"consumes":["application/json"],
+				"produces":["application/json"],
+				"parameters":[
+					{
+						"in":"body",
+						"name":"body",
+						"description":"master key",
+						"required":true,
+						"schema":{"$ref":"#/definitions/keyBody"}
+					}
+				],
+				       "responses": {
+					"200": {
+							"description": "table list object",
+							"schema": {"type":"array","type":{"$ref": "#/definitions/cloudTable"}}																			
+							},
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
+			}
+		},
+					"/table/{table_name}":{
+			"post":{
+				"tags":["CloudTable"],
+				"description":"get a table",
+				"operationId":"get",
+				"consumes":["application/json"],
+				"produces":["application/json"],
+				"parameters":[
+				{
+					"name":"table_name",
+					"in":"path",
+					"description":"name of cloud table",
+					"required":true,
+					"type":"string"
+				},
+					{
+						"in":"body",
+						"name":"body",
+						"description":"master key and app id",
+						"required":true,
+						"schema":{"$ref":"#/definitions/keyAppId"}
+					}
+				],
+				       "responses": {
+					"200": {
+							"description": "successfully go table",
+							"schema": {"$ref": "#/definitions/cloudTable"}																			
+							},
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
+			}
+		},
+			"app_id/table/{table_name}":{
+			"put":{
+				"tags":["CloudTable"],
+				"description":"save a cloud table",
+				"operationId":"save",
+				"consumes":["application/json"],
+				"produces":["application/json"],
+				"parameters":[
+				{
+					"name":"table_name",
+					"in":"path",
+					"description":"name of cloud table",
+					"required":true,
+					"type":"string"
+				},
+				{
+					"name":"app_id",
+					"in":"path",
+					"description":"cloud app id",
+					"required":true,
+					"type":"string"
+				},
+					{
+						"in":"body",
+						"name":"body",
+						"description":"master key and app id",
+						"required":true,
+						"schema":{"$ref":"#/definitions/cloudTableSave"}
+					}
+				],
+				       "responses": {
+					"200": {
+							"description": "successfully saved table",
+							"schema": {"$ref": "#/definitions/cloudTable"}																			
+							},
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
+			},
+						"delete":{
+				"tags":["CloudTable"],
+				"description":"delete a cloud table",
+				"operationId":"save",
+				"consumes":["application/json"],
+				"produces":["application/json"],
+				"parameters":[
+				{
+					"name":"table_name",
+					"in":"path",
+					"description":"name of cloud table",
+					"required":true,
+					"type":"string"
+				},
+				{
+					"name":"app_id",
+					"in":"path",
+					"description":"cloud app id",
+					"required":true,
+					"type":"string"
+				},
+					{
+						"in":"body",
+						"name":"body",
+						"description":"master key and app id",
+						"required":true,
+						"schema":{"$ref":"#/definitions/cloudTableSave"}
+					}
+				],
+				       "responses": {
+					"200": {
+							"description": "successfully deleted table",
+							"schema": {"$ref": "#/definitions/cloudTable"}																			
+							},
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
+			}
+		},
+	
+	},
+	"definitions":{
+		"keyAppId":{
+				"type":"object",
+				"properties":{
+					"key":{"type":"string","default":"app_key"},
+					"appId":{"type":"string","default":"app_id"}
+				}
+			},
+			"keyBody":{
+				"type":"object",
+				"properties":{
+					"key":{"type":"string","default":"app_key"}
+				}
+			},
+				"column":{
+				"type":"object",
+				"properties":{
+					"name":{"type":"string","default":"table_name"},
+					"dataType":{"type":"string","enum":["Text","Email","URL","Number","Boolean","DateTime","GeoPoint","File","List","Relation","Object","Id","EncryptedText","ACL"],"default":"Text"},
+					"_type":{"type":"string","default":"column"},
+					"required":{"type":"boolean","default":false},
+					"unique":{"type":"boolean","default":false},
+					"relatedTo":{"type":"string","default":"null"},
+					"relationType":{"type":"string","default":"null"},
+					"isDeletable":{"type":"boolean","default":true},
+					"isEditable":{"type":"boolean","default":true},
+					"isRenamable":{"type":"boolean","default":false}
+				}
+			},
+			"cloudTable":{
+				"type":"object",
+				"properties":{
+					"name":{"type":"string","default":"table_name"},
+					"appId":{"type":"string","default":"app_id"},
+					"_type":{"type":"string","default":"table"},
+					"type":{"type":"string","enum":["user","role","custom"],"default":"custom"},
+					"columns":{"type":"array","items":{"$ref":"#definitions/column"},"default":[{"_type":"column","relatedTo":"null","dataType":"Id","relationType":"null","unique":true,"name":"id","isRenamable":false,"isDeletable":false,"required":true,"isEditable":false},{"_type":"column","relatedTo":"null","dataType":"DateTime","relationType":"null","unique":false,"name":"expires","isRenamable":false,"isDeletable":false,"required":false,"isEditable":false},{"_type":"column","relatedTo":"null","dataType":"DateTime","relationType":"null","unique":false,"name":"createdAt","isRenamable":false,"isDeletable":false,"required":true,"isEditable":false},{"_type":"column","relatedTo":"null","dataType":"DateTime","relationType":"null","unique":false,"name":"updatedAt","isRenamable":false,"isDeletable":false,"required":true,"isEditable":false},{"_type":"column","relatedTo":"null","dataType":"ACL","relationType":"null","unique":false,"name":"ACL","isRenamable":false,"isDeletable":false,"required":true,"isEditable":false}]}
+				}
+			}	
+			,
+			"cloudTableSave":{
+				"type":"object",
+				"properties":{
+					"data":{"$ref":"#definitions/cloudTable"},
+					"key":{"type":"string","default":"app_key"}
+				}
+			}
+	},
+	"externalDocs":{"description":"Find out more about CloudBoost API","url":"https://docs.cloudboost.io"}
+}

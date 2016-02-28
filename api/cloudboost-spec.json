@@ -5837,7 +5837,7 @@
                     "format": "date-time"
                 },
                 "_hash": {
-                    "type": "string"
+                    "type": ["string","null"]
                 },
                 "_modifiedColumns": {
                     "type": "array",

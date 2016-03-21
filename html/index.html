@@ -1,0 +1,5449 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>CloudBoost Application API</title>
+    <style type="text/css">
+      body { 
+	font-family: Trebuchet MS, sans-serif;
+	font-size: 15px;
+	color: #444;
+	margin-right: 24px;
+}
+
+h1	{
+	font-size: 25px;
+}
+h2	{
+	font-size: 20px;
+}
+h3	{
+	font-size: 16px;
+	font-weight: bold;
+}
+hr	{
+	height: 1px;
+	border: 0;
+	color: #ddd;
+	background-color: #ddd;
+	display: none;
+}
+
+.app-desc {
+  clear: both;
+  margin-left: 20px;
+}
+.param-name {
+  width: 100%;
+}
+.license-info {
+  margin-left: 20px;
+}
+
+.license-url {
+  margin-left: 20px;
+}
+
+.model {
+  margin: 0 0 0px 20px;
+}
+
+.method {
+  margin-left: 20px;
+}
+
+.method-notes	{
+	margin: 10px 0 20px 0;
+	font-size: 90%;
+	color: #555;
+}
+
+pre {
+  padding: 10px;
+  margin-bottom: 2px;
+}
+
+.http-method {
+ text-transform: uppercase;
+}
+
+pre.get {
+  background-color: #0f6ab4;
+}
+
+pre.post {
+  background-color: #10a54a;
+}
+
+pre.put {
+  background-color: #c5862b;
+}
+
+pre.delete {
+  background-color: #a41e22;
+}
+
+.huge	{
+	color: #fff;
+}
+
+pre.example {
+  background-color: #f3f3f3;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+code {
+  white-space: pre;
+}
+
+.nickname {
+  font-weight: bold;
+}
+
+.method-path {
+  font-size: 1.5em;
+  background-color: #0f6ab4;
+}
+
+.up {
+  float:right;
+}
+
+.parameter {
+  width: 500px;
+}
+
+.param {
+  width: 500px;
+  padding: 10px 0 0 20px;
+  font-weight: bold;
+}
+
+.param-desc {
+  width: 700px;
+  padding: 0 0 0 20px;
+  color: #777;
+}
+
+.param-type {
+  font-style: italic;
+}
+
+.param-enum-header {
+width: 700px;
+padding: 0 0 0 60px;
+color: #777;
+font-weight: bold;
+}
+
+.param-enum {
+width: 700px;
+padding: 0 0 0 80px;
+color: #777;
+font-style: italic;
+}
+
+.field-label {
+  padding: 0;
+  margin: 0;
+  clear: both;
+}
+
+.field-items	{
+	padding: 0 0 15px 0;
+	margin-bottom: 15px;
+}
+
+.return-type {
+  clear: both;
+  padding-bottom: 10px;
+}
+
+.param-header {
+  font-weight: bold;
+}
+
+.method-tags {
+  text-align: right;
+}
+
+.method-tag {
+  background: none repeat scroll 0% 0% #24A600;
+  border-radius: 3px;
+  padding: 2px 10px;
+  margin: 2px;
+  color: #FFF;
+  display: inline-block;
+  text-decoration: none;
+}
+    </style>
+  </head>
+  <body>
+  <h1>CloudBoost Application API</h1>
+    <div class="app-desc">Power your web or mobile application backend with cloudboost Database Service</div>
+    <div class="app-desc">More information: <a href="https://cloudboost.io">https://cloudboost.io</a></div>
+    <div class="app-desc">Contact Info: <a href="ben@cloudboost.io">ben@cloudboost.io</a></div>
+    <div class="app-desc">Version: 1.0.0</div>
+    <div class="license-info">MIT</div>
+    <div class="license-url">http://opensource.org/licenses/MIT</div>
+  <h2>Access</h2>
+  
+
+  <h2><a name="__Methods">Methods</a></h2>
+  [ Jump to <a href="#__Models">Models</a> ]
+
+  
+  <h2>Table of Contents </h2>
+  <div class="method-summary"></div>
+  
+  <ol>
+  
+  
+  
+  <li><a href="#clearCache"><code><span class="http-method">delete</span> cache/{app_id}/{cache_name}/clear</code></a></li>
+  
+  <li><a href="#createCache"><code><span class="http-method">post</span> cache/{app_id}/{cache_name}/create</code></a></li>
+  
+  <li><a href="#deleteAllCache"><code><span class="http-method">delete</span> cache/{app_id}</code></a></li>
+  
+  <li><a href="#deleteCache"><code><span class="http-method">delete</span> cache/{app_id}/{cache_name}</code></a></li>
+  
+  <li><a href="#deleteItem"><code><span class="http-method">delete</span> cache/{app_id}/{cache_name}/item/{data_key}</code></a></li>
+  
+  <li><a href="#getAllCache"><code><span class="http-method">post</span> cache/{app_id}</code></a></li>
+  
+  <li><a href="#getAllItems"><code><span class="http-method">post</span> cache/{app_id}/{cache_name}/items</code></a></li>
+  
+  <li><a href="#getCacheInfo"><code><span class="http-method">post</span> cache/{app_id}/{cache_name}</code></a></li>
+  
+  <li><a href="#getItem"><code><span class="http-method">post</span> cache/{app_id}/{cache_name}/{data_key}/item</code></a></li>
+  
+  <li><a href="#getItemsCount"><code><span class="http-method">post</span> cache/{app_id}/{cache_name}/items/count</code></a></li>
+  
+  <li><a href="#set"><code><span class="http-method">put</span> cache/{app_id}/{cache_name}/{data_key}</code></a></li>
+  
+  
+  
+  
+  
+  <li><a href="#deleteFile"><code><span class="http-method">delete</span> file/{app_id}/{file_id}</code></a></li>
+  
+  <li><a href="#fetchFileContent"><code><span class="http-method">post</span> file/{app_id}/{file_id}</code></a></li>
+  
+  <li><a href="#saveFile"><code><span class="http-method">post</span> file/{app_id}</code></a></li>
+  
+  <li><a href="#saveFileData"><code><span class="http-method">post</span> file/{my_app_id}</code></a></li>
+  
+  
+  
+  
+  
+  <li><a href="#delete"><code><span class="http-method">delete</span> data/{app_id}/{table_name}</code></a></li>
+  
+  <li><a href="#save"><code><span class="http-method">put</span> data/{app_id}/{table_name}</code></a></li>
+  
+  
+  
+  
+  
+  <li><a href="#count"><code><span class="http-method">post</span> data/{app_id}/{table_name}/count</code></a></li>
+  
+  <li><a href="#distinct"><code><span class="http-method">post</span> data/{app_id}/{table_name}/distinct</code></a></li>
+  
+  <li><a href="#find"><code><span class="http-method">post</span> data/{app_id}/{table_name}/find</code></a></li>
+  
+  <li><a href="#findById"><code><span class="http-method">post</span> data/{cloud_app_id}/{table_name}/find</code></a></li>
+  
+  <li><a href="#findOne"><code><span class="http-method">post</span> data/{app_id}/{table_name}/findOne</code></a></li>
+  
+  
+  
+  
+  
+  <li><a href="#addMessage"><code><span class="http-method">put</span> queue/{app_id}/{queue_name}/message</code></a></li>
+  
+  <li><a href="#addSubscriber"><code><span class="http-method">post</span> queue/{app_id}/{queue_name}/subscriber</code></a></li>
+  
+  <li><a href="#clear"><code><span class="http-method">delete</span> queue/{app_id}/{queue_name}/clear</code></a></li>
+  
+  <li><a href="#createQueue"><code><span class="http-method">post</span> queue/{app_id}/{queue_name}/create</code></a></li>
+  
+  <li><a href="#deleteMessage"><code><span class="http-method">delete</span> queue/{app_id}/{queue_name}/message/{message_id}</code></a></li>
+  
+  <li><a href="#deleteQueue"><code><span class="http-method">delete</span> queue/{app_id}/{queue_name}</code></a></li>
+  
+  <li><a href="#deleteSubscriber"><code><span class="http-method">delete</span> queue/{app_id}/{queue_name}/subscriber</code></a></li>
+  
+  <li><a href="#getAllMessages"><code><span class="http-method">post</span> queue/{app_id}/messages</code></a></li>
+  
+  <li><a href="#getAllQueues"><code><span class="http-method">post</span> queue/{app_id}</code></a></li>
+  
+  <li><a href="#getMessage"><code><span class="http-method">post</span> queue/{app_id}/{queue_name}/getMessage</code></a></li>
+  
+  <li><a href="#getMessageById"><code><span class="http-method">post</span> queue/{app_id}/{queue_name}/message/{message_id}</code></a></li>
+  
+  <li><a href="#getQueue"><code><span class="http-method">post</span> queue/{app_id}/{queue_name}</code></a></li>
+  
+  <li><a href="#peek"><code><span class="http-method">post</span> queue/{app_id}/{queue_name}/peek</code></a></li>
+  
+  <li><a href="#peekMessage"><code><span class="http-method">post</span> queue/{app_id}/{queue_name}/peekMessage</code></a></li>
+  
+  <li><a href="#pull"><code><span class="http-method">post</span> queue/{app_id}/{queue_name}/pull</code></a></li>
+  
+  <li><a href="#refreshMessageTimeout"><code><span class="http-method">put</span> queue/{app_id}/{queue_name}/{message_id}/refresh-message-timeout</code></a></li>
+  
+  <li><a href="#updateMessage"><code><span class="http-method">put</span> queue/{my_app_id}/{queue_name}/message</code></a></li>
+  
+  <li><a href="#updateQueue"><code><span class="http-method">put</span> queue/{app_id}/{queue_name}</code></a></li>
+  
+  
+  
+  
+  
+  <li><a href="#createRole"><code><span class="http-method">put</span> data/{app_id}/Role</code></a></li>
+  
+  
+  
+  
+  
+  <li><a href="#search"><code><span class="http-method">post</span> data/{app_id}/{table_name}/search</code></a></li>
+  
+  
+  
+  
+  
+  <li><a href="#deleteTable"><code><span class="http-method">delete</span> app/{app_id}/{table_name}</code></a></li>
+  
+  <li><a href="#get"><code><span class="http-method">post</span> app/{app_id}/{table_name}</code></a></li>
+  
+  <li><a href="#getAll"><code><span class="http-method">post</span> /app/{app_id}/_getAll</code></a></li>
+  
+  <li><a href="#save"><code><span class="http-method">put</span> app/{app_id}/{table_name}</code></a></li>
+  
+  
+  
+  
+  
+  <li><a href="#addToRole"><code><span class="http-method">put</span> user/{app_id}/addToRole</code></a></li>
+  
+  <li><a href="#changePassword"><code><span class="http-method">put</span> user/{app_id}/changePassword</code></a></li>
+  
+  <li><a href="#login"><code><span class="http-method">post</span> user/{app_id}/login</code></a></li>
+  
+  <li><a href="#logout"><code><span class="http-method">post</span> user/{app_id}/logout</code></a></li>
+  
+  <li><a href="#removeFromRole"><code><span class="http-method">put</span> user/{app_id}/removeFromRole</code></a></li>
+  
+  <li><a href="#resetPassword"><code><span class="http-method">post</span> user/{app_id}/resetPassword</code></a></li>
+  
+  <li><a href="#signUp"><code><span class="http-method">post</span> user/{app_id}/signup</code></a></li>
+  
+  
+  
+  </ol>
+  
+
+  
+  
+  
+  
+  <div class="method"><a name="clearCache"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> cache/{app_id}/{cache_name}/clear</code></pre></div>
+    <div class="method-summary">clear all items from a cloud cache (<span class="nickname">clearCache</span>)</div>
+    
+    <div class="method-notes">clear all items from a cloud cache</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Id of CloudApp </div><div class="param">cache_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Name of cache </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; master key of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#cacheRequest">cacheRequest</a>]
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    successfully cleared cache
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="createCache"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> cache/{app_id}/{cache_name}/create</code></pre></div>
+    <div class="method-summary">create a cloud cache (<span class="nickname">createCache</span>)</div>
+    
+    <div class="method-notes">create a cloud cache</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Id of CloudApp </div><div class="param">cache_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Name of cache </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; master key of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#cache">cache</a>
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    successfully created a cache
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="deleteAllCache"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> cache/{app_id}</code></pre></div>
+    <div class="method-summary">delete all CloudCaches (<span class="nickname">deleteAllCache</span>)</div>
+    
+    <div class="method-notes">delete all CloudCaches</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Id of CloudApp </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; master key of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#cacheRequest">cacheRequest</a>]
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    successfully deleted caches
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="deleteCache"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> cache/{app_id}/{cache_name}</code></pre></div>
+    <div class="method-summary">delete a CloudCache (<span class="nickname">deleteCache</span>)</div>
+    
+    <div class="method-notes">delete a CloudCache</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Id of CloudApp </div><div class="param">cache_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Name of cache </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; master key of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#cacheRequest">cacheRequest</a>
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    successfully deleted cache
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="deleteItem"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> cache/{app_id}/{cache_name}/item/{data_key}</code></pre></div>
+    <div class="method-summary">delete item from a cloud cache (<span class="nickname">deleteItem</span>)</div>
+    
+    <div class="method-notes">delete item from a cloud cache</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Id of CloudApp </div><div class="param">cache_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Name of cache </div><div class="param">data_key (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; key under which data to delete is cached </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; master key of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    successfully removed item from cache, returned is deleted item key
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="getAllCache"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> cache/{app_id}</code></pre></div>
+    <div class="method-summary">get all CloudCaches (<span class="nickname">getAllCache</span>)</div>
+    
+    <div class="method-notes">get all CloudCaches</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Id of CloudApp </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; master key of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#cache">cache</a>]
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    successfully got caches
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="getAllItems"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> cache/{app_id}/{cache_name}/items</code></pre></div>
+    <div class="method-summary">get all items from a cloud cache (<span class="nickname">getAllItems</span>)</div>
+    
+    <div class="method-notes">get all items from a cloud cache</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Id of CloudApp </div><div class="param">cache_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Name of cache </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; master key of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#cacheItem">cacheItem</a>]
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    successfully got items from cache
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="getCacheInfo"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> cache/{app_id}/{cache_name}</code></pre></div>
+    <div class="method-summary">get info about a CloudCache (<span class="nickname">getCacheInfo</span>)</div>
+    
+    <div class="method-notes">get info about a CloudCache</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Id of CloudApp </div><div class="param">cache_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Name of cache </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; master key of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#cache">cache</a>
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    successfully got cache info
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="getItem"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> cache/{app_id}/{cache_name}/{data_key}/item</code></pre></div>
+    <div class="method-summary">get item from a cloud cache (<span class="nickname">getItem</span>)</div>
+    
+    <div class="method-notes">get item from a cloud cache</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Id of CloudApp </div><div class="param">cache_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Name of cache </div><div class="param">data_key (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; key under which data should be got in cache </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; master key of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    successfully got item from cache
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="getItemsCount"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> cache/{app_id}/{cache_name}/items/count</code></pre></div>
+    <div class="method-summary">count items in a cloud cache (<span class="nickname">getItemsCount</span>)</div>
+    
+    <div class="method-notes">count items in a cloud cache</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Id of CloudApp </div><div class="param">cache_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Name of cache </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; master key of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      Integer
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    item count
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="set"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> cache/{app_id}/{cache_name}/{data_key}</code></pre></div>
+    <div class="method-summary">add item to a cloud cache (<span class="nickname">set</span>)</div>
+    
+    <div class="method-notes">add item to a cloud cache</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Id of CloudApp </div><div class="param">cache_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Name of cache </div><div class="param">data_key (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; key under which data should be store in cache </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; cache data and master key included got from this object </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+      <li><code>text/plain;charset=utf-8</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    successfully added to cache
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  
+  
+  
+  
+  <div class="method"><a name="deleteFile"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> file/{app_id}/{file_id}</code></pre></div>
+    <div class="method-summary">deletes file (<span class="nickname">deleteFile</span>)</div>
+    
+    <div class="method-notes"></div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of app </div><div class="param">file_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; file id </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; request body </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    successful operation
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="fetchFileContent"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> file/{app_id}/{file_id}</code></pre></div>
+    <div class="method-summary">fetch file content (<span class="nickname">fetchFileContent</span>)</div>
+    
+    <div class="method-notes"></div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of app </div><div class="param">file_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; file id </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; request body </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+      <li><code>application/octet-stream</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    successful operation
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="saveFile"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> file/{app_id}</code></pre></div>
+    <div class="method-summary">uploads a file (<span class="nickname">saveFile</span>)</div>
+    
+    <div class="method-notes"></div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>multipart/form-data</code></li>
+    
+    </ul>
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Form parameters</h3>
+    <div class="field-items">
+      <div class="param">key (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash; app key </div><div class="param">fileObj (required)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash; file extra data </div><div class="param">fileToUpload (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash; file to upload </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    successful operation
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="saveFileData"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> file/{my_app_id}</code></pre></div>
+    <div class="method-summary">uploads a file with data (<span class="nickname">saveFileData</span>)</div>
+    
+    <div class="method-notes"></div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">my_app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">fileObj (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; file extra data </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    successful operation
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  
+  
+  
+  
+  <div class="method"><a name="delete"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> data/{app_id}/{table_name}</code></pre></div>
+    <div class="method-summary">deletes a cloud object from cloudapp (<span class="nickname">delete</span>)</div>
+    
+    <div class="method-notes">deletes a cloud object from cloudapp</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; CloudApp id </div><div class="param">table_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; cloud table name </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; CloudObject that needs to be added to the cloudboost </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#CloudObject">CloudObject</a>
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    cloudsave response
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="save"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> data/{app_id}/{table_name}</code></pre></div>
+    <div class="method-summary">saves a cloud object to cloudboost (<span class="nickname">save</span>)</div>
+    
+    <div class="method-notes"></div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; CloudApp id </div><div class="param">table_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; cloud table name </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; CloudObject that needs to be added to cloudboost </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#CloudObject">CloudObject</a>
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    cloudsave response
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  
+  
+  
+  
+  <div class="method"><a name="count"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> data/{app_id}/{table_name}/count</code></pre></div>
+    <div class="method-summary">count items in a table that match this query criteria (<span class="nickname">count</span>)</div>
+    
+    <div class="method-notes">count items in a table that match this query criteria</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; CloudApp id </div><div class="param">table_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; cloud table name </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; query body </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      Integer
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    cloudsave response
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="distinct"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> data/{app_id}/{table_name}/distinct</code></pre></div>
+    <div class="method-summary">distinct query criteria (<span class="nickname">distinct</span>)</div>
+    
+    <div class="method-notes"></div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; CloudApp id </div><div class="param">table_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; cloud table name </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; query body </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#CloudObject">CloudObject</a>]
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    cloudsave response
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="find"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> data/{app_id}/{table_name}/find</code></pre></div>
+    <div class="method-summary">find CloudObject meeting this query criteria (<span class="nickname">find</span>)</div>
+    
+    <div class="method-notes"></div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; CloudApp id </div><div class="param">table_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; cloud table name </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; query object </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#CloudObject">CloudObject</a>]
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    cloudsave response
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="findById"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> data/{cloud_app_id}/{table_name}/find</code></pre></div>
+    <div class="method-summary">find CloudObject with specific _id (<span class="nickname">findById</span>)</div>
+    
+    <div class="method-notes"></div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">cloud_app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; CloudApp id </div><div class="param">table_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; cloud table name </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; query body </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#CloudObject">CloudObject</a>
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    cloudsave response
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="findOne"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> data/{app_id}/{table_name}/findOne</code></pre></div>
+    <div class="method-summary">find a single CloudObject (<span class="nickname">findOne</span>)</div>
+    
+    <div class="method-notes"></div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; CloudApp id </div><div class="param">table_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; cloud table name </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; query body </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#CloudObject">CloudObject</a>
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    cloudsave response
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  
+  
+  
+  
+  <div class="method"><a name="addMessage"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> queue/{app_id}/{queue_name}/message</code></pre></div>
+    <div class="method-summary">push message to queue (<span class="nickname">addMessage</span>)</div>
+    
+    <div class="method-notes">add message message to queue</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Id of CloudApp </div><div class="param">queue_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Name of queue </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; client key of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#QueueMessage">QueueMessage</a>]
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    push done
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="addSubscriber"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> queue/{app_id}/{queue_name}/subscriber</code></pre></div>
+    <div class="method-summary">add a subscriber to this queue (<span class="nickname">addSubscriber</span>)</div>
+    
+    <div class="method-notes">add a subscriber to this queue</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Id of CloudApp </div><div class="param">queue_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Name of queue </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; payload </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Queue">Queue</a>
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    successfully added subscriber
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="clear"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> queue/{app_id}/{queue_name}/clear</code></pre></div>
+    <div class="method-summary">clear queue (<span class="nickname">clear</span>)</div>
+    
+    <div class="method-notes">clear queue</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Id of CloudApp </div><div class="param">queue_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Name of queue </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; client key of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Queue">Queue</a>
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    success
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="createQueue"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> queue/{app_id}/{queue_name}/create</code></pre></div>
+    <div class="method-summary">create a new queue (<span class="nickname">createQueue</span>)</div>
+    
+    <div class="method-notes">add message message to queue</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Id of CloudApp </div><div class="param">queue_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; name of queue </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; client key of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Queue">Queue</a>
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    push done
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="deleteMessage"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> queue/{app_id}/{queue_name}/message/{message_id}</code></pre></div>
+    <div class="method-summary">delete a message in this queue (<span class="nickname">deleteMessage</span>)</div>
+    
+    <div class="method-notes">delete a message in this queue</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Id of CloudApp </div><div class="param">queue_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Name of queue </div><div class="param">message_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; message id </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; client key of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#QueueMessage">QueueMessage</a>]
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    successfully deleted message
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="deleteQueue"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> queue/{app_id}/{queue_name}</code></pre></div>
+    <div class="method-summary">delete a queue (<span class="nickname">deleteQueue</span>)</div>
+    
+    <div class="method-notes">delete queue</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Id of CloudApp </div><div class="param">queue_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Name of queue </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; client key of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Queue">Queue</a>
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    success
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="deleteSubscriber"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> queue/{app_id}/{queue_name}/subscriber</code></pre></div>
+    <div class="method-summary">delete a subscriber to this queue (<span class="nickname">deleteSubscriber</span>)</div>
+    
+    <div class="method-notes">delete a subscriber to this queue</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Id of CloudApp </div><div class="param">queue_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Name of queue </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; payload </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Queue">Queue</a>
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    successfully deleted subscriber
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="getAllMessages"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> queue/{app_id}/messages</code></pre></div>
+    <div class="method-summary">push message to queue (<span class="nickname">getAllMessages</span>)</div>
+    
+    <div class="method-notes">add message message to queue</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Id of CloudApp </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; client key of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#QueueMessage">QueueMessage</a>]
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    push done
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="getAllQueues"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> queue/{app_id}</code></pre></div>
+    <div class="method-summary">get all queues (<span class="nickname">getAllQueues</span>)</div>
+    
+    <div class="method-notes">get all queues</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Id of CloudApp </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; client key of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Queue">Queue</a>]
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+      <li><code>text/plain;charset=utf-8</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    success
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="getMessage"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> queue/{app_id}/{queue_name}/getMessage</code></pre></div>
+    <div class="method-summary">get messages in queue (<span class="nickname">getMessage</span>)</div>
+    
+    <div class="method-notes">get messages in queue</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Id of CloudApp </div><div class="param">queue_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Name of queue </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; client key of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#QueueMessage">QueueMessage</a>]
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    peek done
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="getMessageById"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> queue/{app_id}/{queue_name}/message/{message_id}</code></pre></div>
+    <div class="method-summary">get a message in this queue by its id (<span class="nickname">getMessageById</span>)</div>
+    
+    <div class="method-notes">get a message in this queue by its id</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Id of CloudApp </div><div class="param">queue_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Name of queue </div><div class="param">message_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; message id </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; client key of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#QueueMessage">QueueMessage</a>
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    successfully got message
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="getQueue"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> queue/{app_id}/{queue_name}</code></pre></div>
+    <div class="method-summary">get queue (<span class="nickname">getQueue</span>)</div>
+    
+    <div class="method-notes">get queue</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Id of CloudApp </div><div class="param">queue_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Name of queue </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; client key of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Queue">Queue</a>
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    success
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="peek"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> queue/{app_id}/{queue_name}/peek</code></pre></div>
+    <div class="method-summary">peek messages in queue without removing them (<span class="nickname">peek</span>)</div>
+    
+    <div class="method-notes">peek messages in queue without removing them</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Id of CloudApp </div><div class="param">queue_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Name of queue </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; client key of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#QueueMessage">QueueMessage</a>]
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    peek done
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="peekMessage"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> queue/{app_id}/{queue_name}/peekMessage</code></pre></div>
+    <div class="method-summary">peek messages in queue without removing them (<span class="nickname">peekMessage</span>)</div>
+    
+    <div class="method-notes">peek messages in queue without removing them</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Id of CloudApp </div><div class="param">queue_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Name of queue </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; client key of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#QueueMessage">QueueMessage</a>]
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    peek done
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="pull"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> queue/{app_id}/{queue_name}/pull</code></pre></div>
+    <div class="method-summary">pull messages from queue (<span class="nickname">pull</span>)</div>
+    
+    <div class="method-notes">pull messages from queue</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Id of CloudApp </div><div class="param">queue_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Name of queue </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; client key of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#QueueMessage">QueueMessage</a>]
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    success
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="refreshMessageTimeout"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> queue/{app_id}/{queue_name}/{message_id}/refresh-message-timeout</code></pre></div>
+    <div class="method-summary">refresh timeout of a message in this queue (<span class="nickname">refreshMessageTimeout</span>)</div>
+    
+    <div class="method-notes">refresh timeout of a message in this queue</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Id of CloudApp </div><div class="param">queue_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Name of queue </div><div class="param">message_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; message id </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; client key of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#QueueMessage">QueueMessage</a>]
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    successfully refreshed timeout
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="updateMessage"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> queue/{my_app_id}/{queue_name}/message</code></pre></div>
+    <div class="method-summary">push message to queue (<span class="nickname">updateMessage</span>)</div>
+    
+    <div class="method-notes">add message message to queue</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">my_app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Id of CloudApp </div><div class="param">queue_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Name of queue </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; client key of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#QueueMessage">QueueMessage</a>]
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    push done
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="updateQueue"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> queue/{app_id}/{queue_name}</code></pre></div>
+    <div class="method-summary">update queue (<span class="nickname">updateQueue</span>)</div>
+    
+    <div class="method-notes">update queue</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Id of CloudApp </div><div class="param">queue_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Name of queue </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; client key of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#modifiedQueue">modifiedQueue</a>
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    success
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  
+  
+  
+  
+  <div class="method"><a name="createRole"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> data/{app_id}/Role</code></pre></div>
+    <div class="method-summary">create a new cloudrole (<span class="nickname">createRole</span>)</div>
+    
+    <div class="method-notes"></div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; request body </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#CloudRole">CloudRole</a>
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    successful operation
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  
+  
+  
+  
+  <div class="method"><a name="search"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> data/{app_id}/{table_name}/search</code></pre></div>
+    <div class="method-summary">search for cloudobjects following the criteria defined herein (<span class="nickname">search</span>)</div>
+    
+    <div class="method-notes"></div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; CloudApp id </div><div class="param">table_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; cloud table name </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; query body </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#CloudObject">CloudObject</a>]
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    cloud search response
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  
+  
+  
+  
+  <div class="method"><a name="deleteTable"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> app/{app_id}/{table_name}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">deleteTable</span>)</div>
+    
+    <div class="method-notes">delete a cloud table</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">table_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; name of cloud table </div><div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; cloud app id </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; master key and app id </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#cloudTable">cloudTable</a>
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    successfully deleted table
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="get"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> app/{app_id}/{table_name}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">get</span>)</div>
+    
+    <div class="method-notes">get a table</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">table_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; name of cloud table </div><div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; id of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; master key and app id </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#cloudTable">cloudTable</a>
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    successfully go table
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="getAll"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /app/{app_id}/_getAll</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getAll</span>)</div>
+    
+    <div class="method-notes">get all tables in app</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; app id </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; master key </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    table list object
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="save"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> app/{app_id}/{table_name}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">save</span>)</div>
+    
+    <div class="method-notes">save a cloud table</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">table_name (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; name of cloud table </div><div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; cloud app id </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; master key and app id </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#cloudTable">cloudTable</a>
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    successfully saved table
+    
+    
+    <h4 class="field-label">0</h4>
+    unexpected error
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  
+  
+  
+  
+  <div class="method"><a name="addToRole"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> user/{app_id}/addToRole</code></pre></div>
+    <div class="method-summary">add a user to a role (<span class="nickname">addToRole</span>)</div>
+    
+    <div class="method-notes"></div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; request body </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#CloudUser">CloudUser</a>
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    successful operation
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="changePassword"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> user/{app_id}/changePassword</code></pre></div>
+    <div class="method-summary">change a password (<span class="nickname">changePassword</span>)</div>
+    
+    <div class="method-notes">changes the password for a logged in user without logging them out</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; request body </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#CloudUser">CloudUser</a>
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    password reset
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="login"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> user/{app_id}/login</code></pre></div>
+    <div class="method-summary">login existing user (<span class="nickname">login</span>)</div>
+    
+    <div class="method-notes"></div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; request body </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#CloudUser">CloudUser</a>
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    successful operation
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="logout"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> user/{app_id}/logout</code></pre></div>
+    <div class="method-summary">logout user (<span class="nickname">logout</span>)</div>
+    
+    <div class="method-notes"></div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; request body </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#CloudUser">CloudUser</a>
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    successful operation
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="removeFromRole"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> user/{app_id}/removeFromRole</code></pre></div>
+    <div class="method-summary">remove a user from a role (<span class="nickname">removeFromRole</span>)</div>
+    
+    <div class="method-notes"></div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; request body </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#CloudUser">CloudUser</a>
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    successful operation
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="resetPassword"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> user/{app_id}/resetPassword</code></pre></div>
+    <div class="method-summary">reset a password (<span class="nickname">resetPassword</span>)</div>
+    
+    <div class="method-notes">sends a password reset link to the given email</div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; request body </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    password reset
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  <div class="method"><a name="signUp"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> user/{app_id}/signup</code></pre></div>
+    <div class="method-summary">create a new user (<span class="nickname">signUp</span>)</div>
+    
+    <div class="method-notes"></div>
+
+    
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">app_id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of app </div>
+    </div>  <!-- field-items -->
+    
+
+    
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="heaader">Content-Type</span> request header:
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; request body </div>
+    </div>  <!-- field-items -->
+    
+
+    
+
+    
+
+    
+
+    
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#CloudUser">CloudUser</a>
+      
+    </div>
+    
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    
+
+    
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+    
+      <li><code>application/json</code></li>
+    
+    </ul>
+    
+
+    <h3 class="field-label">Responses</h3>
+    
+    <h4 class="field-label">200</h4>
+    successful operation
+    
+    
+  </div> <!-- method -->
+  <hr/>
+  
+  
+  
+  
+
+  <div class="up"><a href="#__Models">Up</a></div>
+  <h2><a name="__Models">Models</a></h2>
+  [ Jump to <a href="#__Methods">Methods</a> ]
+
+  <h2>Table of Contents</h2>
+  <ol>
+  
+  
+    <li><a href="#ACL"><code>ACL</code></a></li>
+  
+  
+  
+    <li><a href="#Allow"><code>Allow</code></a></li>
+  
+  
+  
+    <li><a href="#BoolFilter"><code>BoolFilter</code></a></li>
+  
+  
+  
+    <li><a href="#BoolQuery"><code>BoolQuery</code></a></li>
+  
+  
+  
+    <li><a href="#Cache"><code>Cache</code></a></li>
+  
+  
+  
+    <li><a href="#CacheItem"><code>CacheItem</code></a></li>
+  
+  
+  
+    <li><a href="#CacheRequest"><code>CacheRequest</code></a></li>
+  
+  
+  
+    <li><a href="#CloudFile"><code>CloudFile</code></a></li>
+  
+  
+  
+    <li><a href="#CloudObject"><code>CloudObject</code></a></li>
+  
+  
+  
+    <li><a href="#CloudObjectSaveRequest"><code>CloudObjectSaveRequest</code></a></li>
+  
+  
+  
+    <li><a href="#CloudQuery"><code>CloudQuery</code></a></li>
+  
+  
+  
+    <li><a href="#CloudQueryCount"><code>CloudQueryCount</code></a></li>
+  
+  
+  
+    <li><a href="#CloudQueryDistinct"><code>CloudQueryDistinct</code></a></li>
+  
+  
+  
+    <li><a href="#CloudQueryFindById"><code>CloudQueryFindById</code></a></li>
+  
+  
+  
+    <li><a href="#CloudQueryFindOne"><code>CloudQueryFindOne</code></a></li>
+  
+  
+  
+    <li><a href="#CloudQueryId"><code>CloudQueryId</code></a></li>
+  
+  
+  
+    <li><a href="#CloudRole"><code>CloudRole</code></a></li>
+  
+  
+  
+    <li><a href="#CloudSearch"><code>CloudSearch</code></a></li>
+  
+  
+  
+    <li><a href="#CloudTable"><code>CloudTable</code></a></li>
+  
+  
+  
+    <li><a href="#CloudTableSave"><code>CloudTableSave</code></a></li>
+  
+  
+  
+    <li><a href="#CloudUser"><code>CloudUser</code></a></li>
+  
+  
+  
+    <li><a href="#Column"><code>Column</code></a></li>
+  
+  
+  
+    <li><a href="#Deny"><code>Deny</code></a></li>
+  
+  
+  
+    <li><a href="#EmailBody"><code>EmailBody</code></a></li>
+  
+  
+  
+    <li><a href="#FileBody"><code>FileBody</code></a></li>
+  
+  
+  
+    <li><a href="#FilterBody"><code>FilterBody</code></a></li>
+  
+  
+  
+    <li><a href="#Filtered"><code>Filtered</code></a></li>
+  
+  
+  
+    <li><a href="#KeyBody"><code>KeyBody</code></a></li>
+  
+  
+  
+    <li><a href="#ModifiedQueue"><code>ModifiedQueue</code></a></li>
+  
+  
+  
+    <li><a href="#ModifiedQueueBody"><code>ModifiedQueueBody</code></a></li>
+  
+  
+  
+    <li><a href="#PasswordChangeBody"><code>PasswordChangeBody</code></a></li>
+  
+  
+  
+    <li><a href="#Query"><code>Query</code></a></li>
+  
+  
+  
+    <li><a href="#Queue"><code>Queue</code></a></li>
+  
+  
+  
+    <li><a href="#QueueBody"><code>QueueBody</code></a></li>
+  
+  
+  
+    <li><a href="#QueueMessage"><code>QueueMessage</code></a></li>
+  
+  
+  
+    <li><a href="#QueuePayloadWithCount"><code>QueuePayloadWithCount</code></a></li>
+  
+  
+  
+    <li><a href="#Read"><code>Read</code></a></li>
+  
+  
+  
+    <li><a href="#RefreshMessageTimeoutBody"><code>RefreshMessageTimeoutBody</code></a></li>
+  
+  
+  
+    <li><a href="#RoleBody"><code>RoleBody</code></a></li>
+  
+  
+  
+    <li><a href="#SearchFilter"><code>SearchFilter</code></a></li>
+  
+  
+  
+    <li><a href="#SearchQuery"><code>SearchQuery</code></a></li>
+  
+  
+  
+    <li><a href="#UserBody"><code>UserBody</code></a></li>
+  
+  
+  
+    <li><a href="#UserRoleBody"><code>UserRoleBody</code></a></li>
+  
+  
+  
+    <li><a href="#Write"><code>Write</code></a></li>
+  
+  
+  </ol>
+
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="ACL">ACL</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">read </div><div class="param-desc"><span class="param-type">read</span> </div>
+      
+      <div class="param">write </div><div class="param-desc"><span class="param-type">write</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="Allow">Allow</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">user </div><div class="param-desc"><span class="param-type">array[String]</span> </div>
+      
+      <div class="param">role </div><div class="param-desc"><span class="param-type">array[String]</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="BoolFilter">BoolFilter</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">bool </div><div class="param-desc"><span class="param-type">searchFilter</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="BoolQuery">BoolQuery</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">bool </div><div class="param-desc"><span class="param-type">searchQuery</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="Cache">Cache</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">_type </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">name </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">size </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="CacheItem">CacheItem</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">key </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">value </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="CacheRequest">CacheRequest</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">item </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">key </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="CloudFile">CloudFile</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">_id </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">_type </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">ACL </div><div class="param-desc"><span class="param-type">ACL</span> </div>
+      
+      <div class="param">name </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">size </div><div class="param-desc"><span class="param-type">Float</span> </div>
+      
+      <div class="param">url </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">expires </div><div class="param-desc"><span class="param-type">Date</span> </div>
+      
+      <div class="param">contentType </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="CloudObject">CloudObject</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="CloudObjectSaveRequest">CloudObjectSaveRequest</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">key </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">document </div><div class="param-desc"><span class="param-type">CloudObject</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="CloudQuery">CloudQuery</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">key </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">skip </div><div class="param-desc"><span class="param-type">Integer</span> </div>
+      
+      <div class="param">limit </div><div class="param-desc"><span class="param-type">Integer</span> </div>
+      
+      <div class="param">query </div><div class="param-desc"><span class="param-type">query</span> </div>
+      
+      <div class="param">sort </div><div class="param-desc"><span class="param-type">Object</span> </div>
+      
+      <div class="param">select </div><div class="param-desc"><span class="param-type">Object</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="CloudQueryCount">CloudQueryCount</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">key </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">skip </div><div class="param-desc"><span class="param-type">Integer</span> </div>
+      
+      <div class="param">limit </div><div class="param-desc"><span class="param-type">Integer</span> </div>
+      
+      <div class="param">query </div><div class="param-desc"><span class="param-type">query</span> </div>
+      
+      <div class="param">sort </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">select </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="CloudQueryDistinct">CloudQueryDistinct</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">key </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">skip </div><div class="param-desc"><span class="param-type">Integer</span> </div>
+      
+      <div class="param">limit </div><div class="param-desc"><span class="param-type">Integer</span> </div>
+      
+      <div class="param">query </div><div class="param-desc"><span class="param-type">query</span> </div>
+      
+      <div class="param">sort </div><div class="param-desc"><span class="param-type">Object</span> </div>
+      
+      <div class="param">select </div><div class="param-desc"><span class="param-type">Object</span> </div>
+      
+      <div class="param">onKey </div><div class="param-desc"><span class="param-type">array[String]</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="CloudQueryFindById">CloudQueryFindById</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">key </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">skip </div><div class="param-desc"><span class="param-type">Integer</span> </div>
+      
+      <div class="param">limit </div><div class="param-desc"><span class="param-type">Integer</span> </div>
+      
+      <div class="param">query </div><div class="param-desc"><span class="param-type">cloudQueryId</span> </div>
+      
+      <div class="param">sort </div><div class="param-desc"><span class="param-type">Object</span> </div>
+      
+      <div class="param">select </div><div class="param-desc"><span class="param-type">Object</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="CloudQueryFindOne">CloudQueryFindOne</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">key </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">skip </div><div class="param-desc"><span class="param-type">Integer</span> </div>
+      
+      <div class="param">limit </div><div class="param-desc"><span class="param-type">Integer</span> </div>
+      
+      <div class="param">query </div><div class="param-desc"><span class="param-type">query</span> </div>
+      
+      <div class="param">sort </div><div class="param-desc"><span class="param-type">Object</span> </div>
+      
+      <div class="param">select </div><div class="param-desc"><span class="param-type">Object</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="CloudQueryId">CloudQueryId</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">$includeList </div><div class="param-desc"><span class="param-type">array[String]</span> </div>
+      
+      <div class="param">$include </div><div class="param-desc"><span class="param-type">array[String]</span> </div>
+      
+      <div class="param">_id </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="CloudRole">CloudRole</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="CloudSearch">CloudSearch</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">query </div><div class="param-desc"><span class="param-type">FilterBody</span> </div>
+      
+      <div class="param">sort </div><div class="param-desc"><span class="param-type">array[String]</span> </div>
+      
+      <div class="param">collectionName </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">key </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">skip </div><div class="param-desc"><span class="param-type">Integer</span> </div>
+      
+      <div class="param">limit </div><div class="param-desc"><span class="param-type">Integer</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="CloudTable">CloudTable</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">name </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">appId </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">type </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">user</div><div class="param-enum">role</div><div class="param-enum">custom</div>
+      
+      <div class="param">columns </div><div class="param-desc"><span class="param-type">array[column]</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="CloudTableSave">CloudTableSave</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">data </div><div class="param-desc"><span class="param-type">cloudTable</span> </div>
+      
+      <div class="param">key </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="CloudUser">CloudUser</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="Column">Column</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">name </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">dataType </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">Text</div><div class="param-enum">Email</div><div class="param-enum">URL</div><div class="param-enum">Number</div><div class="param-enum">Boolean</div><div class="param-enum">DateTime</div><div class="param-enum">GeoPoint</div><div class="param-enum">File</div><div class="param-enum">List</div><div class="param-enum">Relation</div><div class="param-enum">Object</div><div class="param-enum">Id</div><div class="param-enum">EncryptedText</div><div class="param-enum">ACL</div>
+      
+      <div class="param">_type </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">required </div><div class="param-desc"><span class="param-type">Boolean</span> </div>
+      
+      <div class="param">unique </div><div class="param-desc"><span class="param-type">Boolean</span> </div>
+      
+      <div class="param">relatedTo </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">relationType </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">isDeletable </div><div class="param-desc"><span class="param-type">Boolean</span> </div>
+      
+      <div class="param">isEditable </div><div class="param-desc"><span class="param-type">Boolean</span> </div>
+      
+      <div class="param">isRenamable </div><div class="param-desc"><span class="param-type">Boolean</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="Deny">Deny</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">user </div><div class="param-desc"><span class="param-type">array[String]</span> </div>
+      
+      <div class="param">role </div><div class="param-desc"><span class="param-type">array[String]</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="EmailBody">EmailBody</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">email </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">key </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="FileBody">FileBody</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">key </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">data </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">fileObj </div><div class="param-desc"><span class="param-type">CloudFile</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="FilterBody">FilterBody</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">filtered </div><div class="param-desc"><span class="param-type">filtered</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="Filtered">Filtered</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">query </div><div class="param-desc"><span class="param-type">boolQuery</span> </div>
+      
+      <div class="param">filter </div><div class="param-desc"><span class="param-type">boolFilter</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="KeyBody">KeyBody</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">key </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="ModifiedQueue">ModifiedQueue</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">ACL </div><div class="param-desc"><span class="param-type">ACL</span> </div>
+      
+      <div class="param">_type </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">expires </div><div class="param-desc"><span class="param-type">Date</span> </div>
+      
+      <div class="param">queueType </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">retry </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">name </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">subscribers </div><div class="param-desc"><span class="param-type">array[String]</span> </div>
+      
+      <div class="param">_isModified </div><div class="param-desc"><span class="param-type">Boolean</span> </div>
+      
+      <div class="param">_modifiedColumns </div><div class="param-desc"><span class="param-type">array[String]</span> </div>
+      
+      <div class="param">messages </div><div class="param-desc"><span class="param-type">array[QueueMessage]</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="ModifiedQueueBody">ModifiedQueueBody</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">document </div><div class="param-desc"><span class="param-type">modifiedQueue</span> </div>
+      
+      <div class="param">key </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="PasswordChangeBody">PasswordChangeBody</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">oldPassword </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">newPassword </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">key </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="Query">Query</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">$includeList </div><div class="param-desc"><span class="param-type">array[String]</span> </div>
+      
+      <div class="param">$include </div><div class="param-desc"><span class="param-type">array[String]</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="Queue">Queue</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">_id </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">_tableName </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">createdAt </div><div class="param-desc"><span class="param-type">Date</span> </div>
+      
+      <div class="param">updatedAt </div><div class="param-desc"><span class="param-type">Date</span> </div>
+      
+      <div class="param">ACL </div><div class="param-desc"><span class="param-type">ACL</span> </div>
+      
+      <div class="param">_type </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">expires </div><div class="param-desc"><span class="param-type">Date</span> </div>
+      
+      <div class="param">queueType </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">retry </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">name </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">subscribers </div><div class="param-desc"><span class="param-type">array[String]</span> </div>
+      
+      <div class="param">messages </div><div class="param-desc"><span class="param-type">array[QueueMessage]</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="QueueBody">QueueBody</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">document </div><div class="param-desc"><span class="param-type">Queue</span> </div>
+      
+      <div class="param">key </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="QueueMessage">QueueMessage</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">ACL </div><div class="param-desc"><span class="param-type">ACL</span> </div>
+      
+      <div class="param">_type </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">expires </div><div class="param-desc"><span class="param-type">Date</span> </div>
+      
+      <div class="param">_id </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">delay </div><div class="param-desc"><span class="param-type">Date</span> </div>
+      
+      <div class="param">timeout </div><div class="param-desc"><span class="param-type">Long</span> </div>
+      
+      <div class="param">_modifiedColumns </div><div class="param-desc"><span class="param-type">array[String]</span> </div>
+      
+      <div class="param">_isModified </div><div class="param-desc"><span class="param-type">Boolean</span> </div>
+      
+      <div class="param">message </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="QueuePayloadWithCount">QueuePayloadWithCount</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">count </div><div class="param-desc"><span class="param-type">Long</span> </div>
+      
+      <div class="param">key </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="Read">Read</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">allow </div><div class="param-desc"><span class="param-type">allow</span> </div>
+      
+      <div class="param">deny </div><div class="param-desc"><span class="param-type">deny</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="RefreshMessageTimeoutBody">RefreshMessageTimeoutBody</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">timeout </div><div class="param-desc"><span class="param-type">Long</span> </div>
+      
+      <div class="param">key </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="RoleBody">RoleBody</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">key </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">document </div><div class="param-desc"><span class="param-type">CloudRole</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="SearchFilter">SearchFilter</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">must_not </div><div class="param-desc"><span class="param-type">array[String]</span> </div>
+      
+      <div class="param">should </div><div class="param-desc"><span class="param-type">array[String]</span> </div>
+      
+      <div class="param">must </div><div class="param-desc"><span class="param-type">array[String]</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="SearchQuery">SearchQuery</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">must_not </div><div class="param-desc"><span class="param-type">array[String]</span> </div>
+      
+      <div class="param">should </div><div class="param-desc"><span class="param-type">array[String]</span> </div>
+      
+      <div class="param">must </div><div class="param-desc"><span class="param-type">array[String]</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="UserBody">UserBody</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">key </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">document </div><div class="param-desc"><span class="param-type">CloudUser</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="UserRoleBody">UserRoleBody</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">key </div><div class="param-desc"><span class="param-type">String</span> </div>
+      
+      <div class="param">role </div><div class="param-desc"><span class="param-type">CloudRole</span> </div>
+      
+      <div class="param">user </div><div class="param-desc"><span class="param-type">CloudUser</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  
+  <div class="model">
+    <h3 class="field-label"><a name="Write">Write</a> <a class="up" href="#__Models">Up</a></h3>
+    <div class="field-items">
+      <div class="param">allow </div><div class="param-desc"><span class="param-type">allow</span> </div>
+      
+      <div class="param">deny </div><div class="param-desc"><span class="param-type">deny</span> </div>
+      
+      
+    </div>  <!-- field-items -->
+  </div>
+  
+  
+  </body>
+</html>

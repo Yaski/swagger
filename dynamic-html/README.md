@@ -1,1 +1,1 @@
-####Dynamic-html SDK
+####Dynamic-HTML SDK

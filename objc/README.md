@@ -1,1 +1,1 @@
-####Objective-c SDK
+####Objective-C SDK

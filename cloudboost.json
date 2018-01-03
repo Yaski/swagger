@@ -1971,7 +1971,7 @@
                 }
             }
         },
-				"/app/{app_id}/_getAll": {
+				"app/{app_id}/_getAll": {
 			"post": {
 				"tags": ["CloudTable"],
 				"description": "get all tables in app",
@@ -1999,7 +1999,7 @@
 						"description": "table list object",
 						"schema": {
 							"type": "array",
-							"type": {
+							"items": {
 								"$ref": "#/definitions/cloudTable"
 							}
 						}
